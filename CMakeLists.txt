@@ -2,19 +2,20 @@
 # General Projects Settings
 #------------------------------------------------------------------------------
 cmake_minimum_required (VERSION 3.11)
-project(TEST_TASK
+set(PROJECT_NAME TEST_TASK)
+project(${PROJECT_NAME}
         LANGUAGES CXX
 )
 
 #------------------------------------------------------------------------------
 # The main executable
 #------------------------------------------------------------------------------
-#add_executable(main
-#        src/main.cpp
-#        )
+add_executable(${PROJECT_NAME}
+        src/main.cpp
+        )
 
-set_property(TARGET main PROPERTY CXX_STANDARD 17)
-target_compile_options(main PRIVATE -Wall)
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 17)
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall)
 
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} Debug)
