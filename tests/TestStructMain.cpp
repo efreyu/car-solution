@@ -27,20 +27,23 @@ TEST(TestStructMain, TestStructSize) {
     EXPECT_EQ(size2->height, 150);
 }
 
-TEST(TestStructMain, TestStructTransform) {
+TEST(TestStructMain, TestStructTransformCollision) {
     sTransform transform1;
     ASSERT_TRUE( transform1.x == 0
                 && transform1.y == 0
                 && transform1.width == 0
                 && transform1.height == 0
                 );
-    sTransform *transform2;
-    transform2 = new sTransform(0, 0, 100, 100);
+    auto *transform2 = new sTransform(0, 0, 100, 100);
     ASSERT_TRUE( transform2->x == 0
                  && transform2->y == 0
                  && transform2->width == 100
                  && transform2->height == 100
     );
-
+    sTransform *transform3 = new sTransform(50, 50, 100, 100);
+    auto *transform4 = new sTransform(120, 120, 100, 100);
+    ASSERT_TRUE(Collision::AABB(*transform2, *transform3));
+    ASSERT_FALSE(Collision::AABB(*transform2, *transform4));
+    ASSERT_TRUE(Collision::AABB(*transform3, *transform3));
 }
 

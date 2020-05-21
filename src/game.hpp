@@ -51,3 +51,13 @@ public:
         , height(transformHeight)
         {};
 };
+
+class Collision {
+public:
+    static bool AABB(const sTransform &transformA, const sTransform &transformB) {
+        return transformA.x + transformA.width >= transformB.x &&
+               transformB.x + transformB.width >= transformA.x &&
+               transformA.y + transformA.height >= transformB.y &&
+               transformB.y + transformB.height >= transformA.y;
+    }
+};
