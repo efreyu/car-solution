@@ -1,0 +1,79 @@
+name: Linux build
+
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+      - '.gitignore'
+      - 'docker/**'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+      - '.gitignore'
+      - 'docker/**'
+
+jobs:
+
+  build:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    name: Ubuntu 18.04
+    runs-on: ubuntu-latest
+
+    env:
+      GIT: "https://github.com"
+      CMAKE_VER: "3.17.0"
+      MANUAL_CACHING: "6"
+      AUTO_CACHING: "1"
+
+    steps:
+
+      - name: Get repository name.
+        run: echo ::set-env name=REPO_NAME::${GITHUB_REPOSITORY##*/}
+
+      - name: Apt install. 🛠
+        shell: bash
+        run: |
+          sudo apt-get update -y
+          sudo apt-get dist-upgrade -y
+          sudo apt-get install -y --fix-missing \
+          git zip cron curl wget python llvm build-essential software-properties-common
+
+      - name: Clone. 🛎️
+        uses: actions/checkout@v1
+        with:
+          submodules: recursive
+          path: ${{ env.REPO_NAME }}
+
+      - name: First set up. ☕️
+        shell: bash
+        run: |
+          g++ -v > CACHE_KEY.txt
+          echo $MANUAL_CACHING >> CACHE_KEY.txt
+          if [ "$AUTO_CACHING" == "1" ]; then
+            thisFile=$REPO_NAME/.github/workflows/ubuntu-desktop.yml
+            echo `md5sum $thisFile | cut -c -32` >> CACHE_KEY.txt
+          fi
+          md5cache=$(md5sum CACHE_KEY.txt | cut -c -32)
+          echo ::set-env name=CACHE_KEY::$md5cache
+
+      - name: Build CMake. 🔨
+        shell: bash
+        run: |
+          mkdir /var/cmake && cd /var/cmake
+          file=cmake-$CMAKE_VER-Linux-x86_64.sh
+          wget $GIT/Kitware/CMake/releases/download/v$CMAKE_VER/$file
+          sudo mkdir /opt/cmake
+          sudo sh $file --prefix=/opt/cmake --skip-license
+          sudo rm /usr/local/bin/cmake
+          sudo ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake
+          rm $file
+          cmake --version
+
+      - name: Build. 🔧
+        shell: bash
+        run: |
+          mkdir build && cd build \
+          && cmake -DCMAKE_BUILD_TYPE=Release .. && make -j$(nproc) \
+          && make test
