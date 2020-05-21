@@ -8,6 +8,9 @@ int main(int argc, char** argv) {
 }
 
 TEST(TestStructMain, TestStructTransformCollision) {
+    /*
+     * Testing constructors
+     */
     sTransform transform1;
     ASSERT_TRUE( transform1.x == 0
                 && transform1.y == 0
@@ -20,10 +23,21 @@ TEST(TestStructMain, TestStructTransformCollision) {
                  && transform2->width == 100
                  && transform2->height == 100
     );
+
+    /*
+     * Testing collision
+     */
     sTransform *transform3 = new sTransform(50, 50, 100, 100);
     auto *transform4 = new sTransform(120, 120, 100, 100);
     ASSERT_TRUE(Collision::AABB(*transform2, *transform3));
     ASSERT_FALSE(Collision::AABB(*transform2, *transform4));
     ASSERT_TRUE(Collision::AABB(*transform3, *transform3));
+
+    /*
+     * Testing directions
+     */
+    EXPECT_EQ(transform3->direction, eDirection::DOWN);
+
+
 }
 
