@@ -9,9 +9,9 @@ project(TEST_TASK
 #------------------------------------------------------------------------------
 # The main executable
 #------------------------------------------------------------------------------
-add_executable(main
-        src/main.cpp
-        )
+#add_executable(main
+#        src/main.cpp
+#        )
 
 set_property(TARGET main PROPERTY CXX_STANDARD 17)
 target_compile_options(main PRIVATE -Wall)
