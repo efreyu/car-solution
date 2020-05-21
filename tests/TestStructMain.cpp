@@ -27,4 +27,20 @@ TEST(TestStructMain, TestStructSize) {
     EXPECT_EQ(size2->height, 150);
 }
 
+TEST(TestStructMain, TestStructTransform) {
+    sTransform transform1;
+    ASSERT_TRUE( transform1.x == 0
+                && transform1.y == 0
+                && transform1.width == 0
+                && transform1.height == 0
+                );
+    sTransform *transform2;
+    transform2 = new sTransform(0, 0, 100, 100);
+    ASSERT_TRUE( transform2->x == 0
+                 && transform2->y == 0
+                 && transform2->width == 100
+                 && transform2->height == 100
+    );
+
+}
 

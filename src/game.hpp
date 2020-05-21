@@ -38,3 +38,16 @@ public:
 //                 (other.pos.y >= pos.y + size.height));
     }
 };
+
+struct sTransform {
+public:
+    int x, y, width, height;
+
+    sTransform() { x = y = width = height = 0; }
+    sTransform(int transformX, int transformY, int transformWidth, int transformHeight)
+        : x(transformX)
+        , y(transformY)
+        , width(transformWidth)
+        , height(transformHeight)
+        {};
+};
