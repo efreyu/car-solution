@@ -17,3 +17,14 @@ TEST(TestStructMain, TestStructPos) {
     EXPECT_EQ(position2->y, 5);
 }
 
+TEST(TestStructMain, TestStructSize) {
+    sSize size1;
+    EXPECT_EQ(size1.width, 0);
+    EXPECT_EQ(size1.height, 0);
+    sSize *size2;
+    size2 = new sSize(100, 150);
+    EXPECT_EQ(size2->width, 100);
+    EXPECT_EQ(size2->height, 150);
+}
+
+
