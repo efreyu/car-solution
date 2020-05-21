@@ -11,6 +11,7 @@ project(${PROJECT_NAME}
 # The main executable
 #------------------------------------------------------------------------------
 add_executable(${PROJECT_NAME}
+        src/game.hpp
         src/main.cpp
         )
 

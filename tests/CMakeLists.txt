@@ -7,4 +7,4 @@ function(INIT_TEST ARG_TARGET)
     add_gtest(${ARG_TARGET})
 endfunction()
 
-#init_test(Target ./file1.cpp ./file2.cpp)
+init_test(TestStructMain ./TestStructMain.cpp ../src/game.hpp)
