@@ -7,4 +7,5 @@ function(INIT_TEST ARG_TARGET)
     add_gtest(${ARG_TARGET})
 endfunction()
 
-init_test(TestStructMain ./TestStructMain.cpp ../src/game.hpp)
+init_test(TestStructTransform TestStructTransform.cpp ../src/game.hpp)
+init_test(TestStructCar TestStructCar.cpp ../src/game.hpp)
