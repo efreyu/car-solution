@@ -41,7 +41,21 @@ public:
     sCar(int speed, sTransform transform) : speed(speed), transform(transform) {};
 
     void move() {
-        //TODO move logic
+        switch (transform.direction) {
+            case eDirection::UP:
+                transform.y += speed;
+                break;
+            case eDirection::RIGHT:
+                transform.x += speed;
+                break;
+            case eDirection::DOWN:
+                transform.y -= speed;
+                break;
+            case eDirection::LEFT:
+                transform.x -= speed;
+                break;
+        }
+        //TODO add fuel burn logic in move method
     }
     int getSpeed() { return speed; };
     int setSpeed(int i) { speed = i; };
@@ -72,6 +86,10 @@ public:
 
 struct sHybridCar : virtual public sGasEngine, virtual public sElectroCar {
 public:
+    sHybridCar() {
+        sGasEngine();
+        sElectroCar();
+    }
     void refill(int count) {
         /* используя тип int мы теряем 1 топливо каждый раз когда вызываем с нечетныйм параметром count */
         charge += count / 2; fuel += count / 2;

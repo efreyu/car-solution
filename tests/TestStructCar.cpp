@@ -56,5 +56,52 @@ TEST(TestStructCar, TestStructCarConstruct) {
     /*
      * Constructor test
      */
-    //TODO
+    sGasEngine *gasCar = new sGasEngine();
+    sElectroCar *electroCar = new sElectroCar();
+    sHybridCar *hybridCar = new sHybridCar();
+
+    ASSERT_TRUE(gasCar->getSpeed() == 0);
+    ASSERT_TRUE(electroCar->getSpeed() == 0);
+    ASSERT_TRUE(hybridCar->getSpeed() == 0);
+
+    gasCar->setSpeed(1);
+    ASSERT_TRUE(gasCar->getSpeed() == 1);
+    ASSERT_TRUE(electroCar->getSpeed() == 0);
+    ASSERT_TRUE(hybridCar->getSpeed() == 0);
+
+    electroCar->setSpeed(2);
+    ASSERT_TRUE(gasCar->getSpeed() == 1);
+    ASSERT_TRUE(electroCar->getSpeed() == 2);
+    ASSERT_TRUE(hybridCar->getSpeed() == 0);
+
+    hybridCar->setSpeed(3);
+    ASSERT_TRUE(gasCar->getSpeed() == 1);
+    ASSERT_TRUE(electroCar->getSpeed() == 2);
+    ASSERT_TRUE(hybridCar->getSpeed() == 3);
+}
+
+TEST(TestStructCar, TestStructCarMove) {
+    /*
+     * Test move method with direction
+     */
+    sTransform *transform = new sTransform(50, 50, 100, 100);
+    sHybridCar *hybridCar = new sHybridCar();
+    hybridCar->setSpeed(speed);
+    hybridCar->transform = *transform;
+    hybridCar->transform.direction = eDirection::DOWN;
+    hybridCar->move();
+    hybridCar->transform.direction = eDirection::RIGHT;
+    hybridCar->move();
+    ASSERT_TRUE(hybridCar->transform.y == transform->y - speed);
+    ASSERT_TRUE(hybridCar->transform.x == transform->x + speed);
+
+    sGasEngine *gasEngineCar = new sGasEngine();
+    gasEngineCar->setSpeed(speed);
+    gasEngineCar->transform = *transform;
+    gasEngineCar->transform.direction = eDirection::UP;
+    gasEngineCar->move();
+    gasEngineCar->transform.direction = eDirection::LEFT;
+    gasEngineCar->move();
+    ASSERT_TRUE(gasEngineCar->transform.y == transform->y + speed);
+    ASSERT_TRUE(gasEngineCar->transform.x == transform->x - speed);
 }
