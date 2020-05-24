@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <vector>
 
-enum class eDirection {
+enum eDirection : std::size_t {
     UP, RIGHT, DOWN, LEFT
 };
 
@@ -130,4 +130,18 @@ public:
         else
             sGasEngine::fuelBurn();
     }
+};
+
+class Game {
+public:
+    bool mIsRunning;
+    Game() {
+        init();
+    }
+
+    void init() {
+        mIsRunning = true;
+    }
+
+    bool isRunning() const { return mIsRunning; }
 };

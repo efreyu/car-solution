@@ -9,3 +9,4 @@ endfunction()
 
 init_test(TestStructTransform TestStructTransform.cpp ../src/game.hpp)
 init_test(TestStructCar TestStructCar.cpp ../src/game.hpp)
+init_test(TestGameClass TestGameClass.cpp ../src/game.hpp)

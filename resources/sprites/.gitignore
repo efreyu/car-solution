@@ -1,0 +1,16 @@
+*
+!.gitignore
+
+# Only CC0 images
+!Electro/black.png
+!Electro/blue.png
+!Electro/red.png
+!Electro/yellow.png
+
+!Gas/grey.png
+!Gas/red.png
+!Gas/white.png
+
+!Hybrid/black.png
+!Hybrid/grey.png
+!Hybrid/white.png

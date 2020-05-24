@@ -10,5 +10,11 @@
 #Temp build folders
 build
 cmake-build-*
+#temp folder for nginx
+public
 
+#libs part
+lib/macOS/*
+!lib/macOS/install.sh
+!lib/macOS/Info.plist
 
