@@ -1,6 +1,6 @@
 /* Created by efreyu on 23.05.2020. */
 #include <gtest/gtest.h>
-#include "../src/game.hpp"
+#include "../src/task.hpp"
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);

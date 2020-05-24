@@ -1,4 +1,5 @@
-#include "game.hpp"
+#include "Classes/Game.h"
+#include "task.hpp"
 
 Game *game = nullptr;
 
