@@ -2,6 +2,25 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include <SDL2/SDL.h>
+#if defined(__APPLE__)
+#include <SDL2_image/SDL_image.h>
+#else
+#include <SDL2/SDL_image.h>
+#endif //__APPLE__
+
+#if defined(__EMSCRIPTEN__)
+#include <emscripten.h>
+#define EMSCRIPTEN_FLAG 0;
+#else
+#define EMSCRIPTEN_FLAG 1;
+#endif //__EMSCRIPTEN__
+
+#ifdef __DEBUG__
+const bool debugMode = true;
+#else
+const bool debugMode = false;
+#endif
 
 enum eDirection : std::size_t {
     UP, RIGHT, DOWN, LEFT
@@ -133,15 +152,119 @@ public:
 };
 
 class Game {
+private:
+    bool mIsEmscripten;
+    bool mIsRunning = false;
+    SDL_Window *mWindow;
+    /**
+     * Frame Limiting
+     */
+    const int mFPS = 60;
+    const int mFrameDelay = 1000 / mFPS;
+    Uint32 mFrameStart;
+    int mFrameTime;
+    /**
+     * Debug mode
+     */
+    static const auto mIsDebug = debugMode;
+
 public:
-    bool mIsRunning;
+    SDL_Renderer *mRenderer;
+    SDL_Event mEvent;
+
     Game() {
-        init();
+        mRenderer = nullptr;
+    }
+    ~Game() = default;
+
+    void Init(const char *title, int xPosition, int yPosition, int width, int height, bool fullscreen)
+    {
+        int fullscreen_flag = fullscreen ? SDL_WINDOW_FULLSCREEN : 0;
+        Uint32 render_flag = SDL_RENDERER_ACCELERATED;
+
+        auto emsTemp = EMSCRIPTEN_FLAG;
+        mIsEmscripten = emsTemp == 0;
+
+        if((mIsEmscripten && SDL_Init( SDL_INIT_VIDEO ) == 0) || (!mIsEmscripten && SDL_Init(SDL_INIT_EVERYTHING) == 0))
+        {
+            if( !SDL_SetHint( SDL_HINT_RENDER_VSYNC, "1" ) )
+            {
+                printf( "Warning: vsync rendering not enabled!" );
+            }
+            // Initialize SDL.
+            mWindow = SDL_CreateWindow(title, xPosition, yPosition, width, height, fullscreen_flag);
+            if (!mWindow) {
+                std::cout << "Warning: window was not created!" << std::endl;
+            }
+
+            mRenderer = SDL_CreateRenderer(mWindow, -1, render_flag);
+            if (mRenderer)
+            {
+                RenderDrawColor();
+                SDL_RenderClear(mRenderer);
+            } else {
+                std::cout << "Warning: renderer was not created!" << std::endl;
+            }
+            mIsRunning = true;
+        } else {
+            mIsRunning = false;
+        }
+
     }
 
-    void init() {
-        mIsRunning = true;
+    void WindowResize(int width, int height) {
+        SDL_SetWindowSize(mWindow, width, height);
     }
 
-    bool isRunning() const { return mIsRunning; }
+    void HandleEvents()
+    {
+        SDL_PollEvent(&mEvent);
+        switch (mEvent.type) {
+            case SDL_QUIT:
+                mIsRunning = false;
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    void Update() {
+        //
+    }
+
+    void Render() {
+        SDL_RenderClear(mRenderer);
+        //
+        SDL_RenderPresent(mRenderer);
+    }
+
+    void GameLoop()
+    {
+        mFrameStart = SDL_GetTicks();
+
+        HandleEvents();
+        Update();
+        Render();
+
+        mFrameTime = SDL_GetTicks() - mFrameStart;
+        if (mFrameDelay > mFrameTime) {
+            SDL_Delay(mFrameDelay - mFrameTime);
+        }
+    }
+
+    void Quit()
+    {
+        SDL_DestroyWindow(mWindow);
+        SDL_DestroyRenderer(mRenderer);
+        SDL_Quit();
+    }
+
+    void RenderDrawColor() {
+        SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, 255);
+    }
+
+    bool isRunning() { return mIsRunning; }
+    constexpr bool isEmscripten() { return mIsEmscripten; }
+    constexpr bool isDebug() { return mIsDebug; }
 };

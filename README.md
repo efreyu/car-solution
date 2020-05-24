@@ -8,7 +8,7 @@ cd test-task
 ```
 
 #### Сбора WebAssembly:
-Для работы нужно установить компилятор emscripten
+Требуется установить emscripten
 ```bash
 mkdir public
 cd public
@@ -17,7 +17,7 @@ make -j$(nproc)
 ```
 
 #### Сборка десктоп версии Linux/MacOS:
-
+Требуется libsdl2 libsdl2img, для macos все включено в cmake
 ```bash
 mkdir build
 cd build
@@ -29,6 +29,8 @@ make test #Не обязательно
 
 #### Конфигурация докера для отладки emscripten
 В сборке предусмотрено 2 контейнера, ubuntu для сборки и nginx для работы веб-сервера
+
+После запуска контейнера приложение доступно по адресу `https://localhost:8080/`
 ```bash
 chmod +x game.sh
 ./game.sh -b                    # Собрать контейнер
