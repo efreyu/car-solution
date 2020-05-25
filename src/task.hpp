@@ -147,33 +147,65 @@ public:
 
 class Creator {
 public:
-    virtual ~Creator() {};
-    virtual sCar* FactoryMethod() const = 0;
-//    void SetTransform() {
-//        //
-//    }
-//    void SetColor() {
-//        //
-//    }
+    std::vector<const char*> textures = {};
+
+    virtual ~Creator() {}
+    virtual sCar* FactoryMethod() const { return nullptr; };
+    void SetTransform() {
+        //
+    }
+
 };
 
 class GasEngineCreator : public Creator {
+private:
+    std::vector<const char*> textures = {
+            "resources/sprites/Gas/grey.png",
+            "resources/sprites/Gas/red.png",
+            "resources/sprites/Gas/white.png"
+    };
 public:
-    sCar* FactoryMethod() const override {
+    sCar* FactoryMethod() const {
         return new sGasEngine();
+    }
+};
+
+class ElectroCarCreator : public Creator {
+private:
+    std::vector<const char*> textures = {
+            "resources/sprites/Electro/black.png",
+            "resources/sprites/Electro/blue.png",
+            "resources/sprites/Electro/red.png",
+            "resources/sprites/Electro/yellow.png"
+    };
+public:
+    sCar* FactoryMethod() const {
+        return new sElectroCar();
+    }
+};
+
+class HybridCarCreator : public Creator {
+private:
+    std::vector<const char*> textures = {
+            "resources/sprites/Hybrid/black.png",
+            "resources/sprites/Hybrid/gray.png",
+            "resources/sprites/Hybrid/while.png"
+    };
+public:
+    sCar* FactoryMethod() const {
+        return new sHybridCar();
     }
 };
 
 class Manager {
 private:
-    std::vector<std::unique_ptr<sCar>> cars;
-    std::vector<std::unique_ptr<Creator>> carTypes;
+    std::vector<Creator*> carTypes;
+    std::vector<sCar*> cars;
 public:
-    Manager() = default;
 
     void Move()
     {
-        for (auto& car : cars) car->move();
+//        for (auto& car : cars) car.move();
     }
 
 //    void addCarType(Creator &creatorType/*, std::vector<const char*> paths*/) {
@@ -181,15 +213,17 @@ public:
 //    }
 
     template <typename T, typename... TArgs>
-    T& addCarType(TArgs&&... mArgs)
+    T& addCarType(TArgs... mArgs)
     {
-        T* c(new T(std::forward<TArgs>(mArgs)...));
-//        c->textures = this;
-        std::unique_ptr<Creator>uPtr { c };
-        carTypes.emplace_back(std::move(uPtr));
+        T* car = new T((mArgs)...);
+        //Manipulation on type
+//        car->someMethod();
+        carTypes.emplace_back(car);
+        //test
+//        cars.emplace_back(car->FactoryMethod());
 
 //        c->init();
-        return *c;
+        return *car;
     }
 
 };

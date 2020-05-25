@@ -6,7 +6,7 @@ SDL_Renderer* Game::mRenderer = nullptr;
 
 Game::Game() {
     mManager = new Manager();
-    auto *gasEngine = new GasEngineCreator();
+//    auto *gasEngine = new GasEngineCreator();
     mManager->addCarType<Creator>();
 }
 Game::~Game() {}
