@@ -146,24 +146,26 @@ public:
 };
 
 class Creator {
-public:
-    std::vector<const char*> textures = {};
+protected:
+    std::vector<std::string> mTextures = {};
 
-    virtual ~Creator() {}
+public:
+    ~Creator() {
+        mTextures = {};
+    }
+
     virtual sCar* FactoryMethod() const { return nullptr; };
+
+    void SetTextures(const std::vector<std::string> textures) {
+        mTextures = textures;
+    }
     void SetTransform() {
-        //
+        //todo set random position
     }
 
 };
 
 class GasEngineCreator : public Creator {
-private:
-    std::vector<const char*> textures = {
-            "resources/sprites/Gas/grey.png",
-            "resources/sprites/Gas/red.png",
-            "resources/sprites/Gas/white.png"
-    };
 public:
     sCar* FactoryMethod() const {
         return new sGasEngine();
@@ -171,13 +173,6 @@ public:
 };
 
 class ElectroCarCreator : public Creator {
-private:
-    std::vector<const char*> textures = {
-            "resources/sprites/Electro/black.png",
-            "resources/sprites/Electro/blue.png",
-            "resources/sprites/Electro/red.png",
-            "resources/sprites/Electro/yellow.png"
-    };
 public:
     sCar* FactoryMethod() const {
         return new sElectroCar();
@@ -185,12 +180,6 @@ public:
 };
 
 class HybridCarCreator : public Creator {
-private:
-    std::vector<const char*> textures = {
-            "resources/sprites/Hybrid/black.png",
-            "resources/sprites/Hybrid/gray.png",
-            "resources/sprites/Hybrid/while.png"
-    };
 public:
     sCar* FactoryMethod() const {
         return new sHybridCar();
@@ -198,32 +187,23 @@ public:
 };
 
 class Manager {
-private:
+protected:
     std::vector<Creator*> carTypes;
     std::vector<sCar*> cars;
 public:
 
-    void Move()
+    void move()
     {
-//        for (auto& car : cars) car.move();
+        for (auto& car : cars) car->move();
     }
 
-//    void addCarType(Creator &creatorType/*, std::vector<const char*> paths*/) {
-
-//    }
-
-    template <typename T, typename... TArgs>
-    T& addCarType(TArgs... mArgs)
-    {
-        T* car = new T((mArgs)...);
+    template <typename T1, typename T2>
+    void RegisterCarType(T2 arg) {
+        T1 *car = new T1();
         //Manipulation on type
-//        car->someMethod();
+        car->SetTextures(arg);
+        //Store in manager array
         carTypes.emplace_back(car);
-        //test
-//        cars.emplace_back(car->FactoryMethod());
-
-//        c->init();
-        return *car;
     }
 
 };

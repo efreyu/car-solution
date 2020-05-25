@@ -8,6 +8,13 @@ int main(int argc, char** argv) {
     return RUN_ALL_TESTS();
 }
 
+class TestManagerClass : public Manager {
+public:
+    int getCountRegisteredCar() {
+        return this->carTypes.size();
+    }
+};
+
 
 TEST(TestGameClass, TestGameClassInit) {
     Game *game = new Game();
@@ -15,15 +22,29 @@ TEST(TestGameClass, TestGameClassInit) {
 }
 
 TEST(TestManagerClass, TestAddCarType) {
-//    std::vector<const char*> array = {"1","2"};
-//    for (auto &v : array) {
-//        EXPECT_EQ(v, "2");
-//    }
-//    Manager manager;
-//    manager.addCarType<GasEngineCreator>((std::vector<const char*>){
-//        "resources/sprites/Gas/grey.png",
-//        "resources/sprites/Gas/red.png",
-//        "resources/sprites/Gas/white.png"
-//    });
+    TestManagerClass manager1;
+    std::vector<std::string> textures = {
+            "resources/sprites/Gas/grey.png",
+            "resources/sprites/Gas/red.png",
+            "resources/sprites/Gas/white.png"
+    };
+    manager1.RegisterCarType<GasEngineCreator>(textures);
+    ASSERT_TRUE(manager1.getCountRegisteredCar() == 1);
+
+    manager1.RegisterCarType<ElectroCarCreator>((std::vector<std::string>){
+            "resources/sprites/Electro/black.png",
+            "resources/sprites/Electro/blue.png",
+            "resources/sprites/Electro/red.png",
+            "resources/sprites/Electro/yellow.png"
+    });
+    ASSERT_TRUE(manager1.getCountRegisteredCar() == 2);
+
+    manager1.RegisterCarType<HybridCarCreator>((std::vector<std::string>){
+            "resources/sprites/Hybrid/black.png",
+            "resources/sprites/Hybrid/gray.png",
+            "resources/sprites/Hybrid/while.png"
+    });
+    ASSERT_TRUE(manager1.getCountRegisteredCar() == 3);
+
 
 }

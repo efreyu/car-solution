@@ -40,3 +40,7 @@ chmod +x game.sh
 ./game.sh -d                    # Остановить контейнеры
 ./game.sh --help                # Для получения справки
 ```
+
+references:
+
+[2D Urban Cars](https://looneybits.itch.io/2d-urban-cars)
