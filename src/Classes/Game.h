@@ -1,11 +1,9 @@
 /* Created by efreyu on 24.05.2020. */
-
-#ifndef CAR_EXAMPLE_GAME_H
-#define CAR_EXAMPLE_GAME_H
+#pragma once
 
 #include <iostream>
 #include <SDL2/SDL.h>
-#include "../task.hpp"
+#include "Manager.h"
 #if defined(__APPLE__)
 #include <SDL2_image/SDL_image.h>
 #else
@@ -76,6 +74,3 @@ public:
     constexpr bool isEmscripten() { return mIsEmscripten; }
     constexpr bool isDebug() { return mIsDebug; }
 };
-
-
-#endif //CAR_EXAMPLE_GAME_H

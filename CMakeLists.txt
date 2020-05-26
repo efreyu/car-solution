@@ -11,9 +11,15 @@ project(${PROJECT_NAME}
 # The main executable
 #------------------------------------------------------------------------------
 add_executable(${PROJECT_NAME}
+        src/Classes/Application.h
+        src/Classes/Collision.h
+        src/Classes/Creator.h
         src/Classes/Game.cpp
-        src/Classes/LoadManager.cpp src/Classes/LoadManager.h
-        src/task.hpp
+        src/Classes/Game.h
+        src/Classes/LoadManager.h
+        src/Classes/Manager.h
+        src/Classes/sCars.h
+        src/Classes/Transform.h
         src/main.cpp
         )
 
