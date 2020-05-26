@@ -20,6 +20,46 @@ namespace TestCarExample {
         }
     };
 
+    class TestGasEngineCreator : public GasEngineCreator {
+    public:
+        int getCountRegisteredTextures() {
+            return mTextures.size();
+        }
+    };
+
+    class TestElectroCarCreator : public ElectroCarCreator {
+    public:
+        int getCountRegisteredTextures() {
+            return mTextures.size();
+        }
+    };
+
+    class TestHybridCarCreator : public HybridCarCreator {
+    public:
+        int getCountRegisteredTextures() {
+            return mTextures.size();
+        }
+    };
+
+    std::vector<std::string> gasEngineTextures = {
+            "resources/sprites/Gas/grey.png",
+            "resources/sprites/Gas/red.png",
+            "resources/sprites/Gas/white.png"
+    };
+
+    std::vector<std::string> electroCarTextures = {
+            "resources/sprites/Electro/black.png",
+            "resources/sprites/Electro/blue.png",
+            "resources/sprites/Electro/red.png",
+            "resources/sprites/Electro/yellow.png"
+    };
+
+    std::vector<std::string> hybridCarTextures = {
+            "resources/sprites/Hybrid/black.png",
+            "resources/sprites/Hybrid/gray.png",
+            "resources/sprites/Hybrid/while.png"
+    };
+
 }
 
 
@@ -36,27 +76,13 @@ TEST(TestManagerClass, TestAddCarType) {
 
     ASSERT_TRUE(manager1.getCountSpawnedCar() == 0);
 
-    std::vector<std::string> textures = {
-            "resources/sprites/Gas/grey.png",
-            "resources/sprites/Gas/red.png",
-            "resources/sprites/Gas/white.png"
-    };
-    manager1.RegisterCarType<GasEngineCreator>(textures);
+    manager1.RegisterCarType<GasEngineCreator>(TestCarExample::gasEngineTextures);
     ASSERT_TRUE(manager1.getCountRegisteredCar() == 1);
 
-    manager1.RegisterCarType<ElectroCarCreator>((std::vector<std::string>){
-            "resources/sprites/Electro/black.png",
-            "resources/sprites/Electro/blue.png",
-            "resources/sprites/Electro/red.png",
-            "resources/sprites/Electro/yellow.png"
-    });
+    manager1.RegisterCarType<ElectroCarCreator>(TestCarExample::electroCarTextures);
     ASSERT_TRUE(manager1.getCountRegisteredCar() == 2);
 
-    manager1.RegisterCarType<HybridCarCreator>((std::vector<std::string>){
-            "resources/sprites/Hybrid/black.png",
-            "resources/sprites/Hybrid/gray.png",
-            "resources/sprites/Hybrid/while.png"
-    });
+    manager1.RegisterCarType<HybridCarCreator>(TestCarExample::hybridCarTextures);
     ASSERT_TRUE(manager1.getCountRegisteredCar() == 3);
 
     /**
@@ -68,4 +94,25 @@ TEST(TestManagerClass, TestAddCarType) {
 
      manager1.SpawnCar(2);
      ASSERT_TRUE(manager1.getCountSpawnedCar() == 3);
+}
+
+TEST(TestManagerClass, TestFactoryClass) {
+    auto *gasEngineCar = new TestCarExample::TestGasEngineCreator();
+    gasEngineCar->SetTextures(TestCarExample::gasEngineTextures);
+    EXPECT_EQ(gasEngineCar->getCountRegisteredTextures(),
+              TestCarExample::gasEngineTextures.size());
+
+    auto *electroCar = new TestCarExample::TestElectroCarCreator();
+    electroCar->SetTextures(TestCarExample::electroCarTextures);
+    EXPECT_EQ(electroCar->getCountRegisteredTextures(),
+              TestCarExample::electroCarTextures.size());
+
+    auto *hybridCar = new TestCarExample::TestHybridCarCreator();
+    hybridCar->SetTextures(TestCarExample::hybridCarTextures);
+    EXPECT_EQ(hybridCar->getCountRegisteredTextures(),
+              TestCarExample::hybridCarTextures.size());
+
+    //Todo test create object
+    sCar *car1 = gasEngineCar->GetObject();
+
 }

@@ -1,11 +1,13 @@
 /* Created by efreyu on 22.05.2020. */
-#pragma once
+#ifndef CAR_EXAMPLE_TASK_HPP
+#define CAR_EXAMPLE_TASK_HPP
 
 #include <iostream>
 #include <cstdlib>
 #include <vector>
 #include <SDL2/SDL.h>
 #include <map>
+#include "Classes/LoadManager.h"
 
 enum eDirection : std::size_t {
     UP, RIGHT, DOWN, LEFT
@@ -56,8 +58,14 @@ public:
         SDL_DestroyTexture(texture);
     }
 
-    void loadTexture(const char* path, int imgWidth, int imgHeight) {
-        //TODO
+    void loadTexture(std::string path) {
+        const char* c = path.c_str();
+        auto *load = new LoadManager();
+//        texture = LoadManager::LoadTexture(c/*(const char*)path.c_str()*/);
+    }
+
+    void draw() {
+//        LoadManager::Draw(texture, srcRect, destRect);
     }
 
     void move() {
@@ -149,21 +157,35 @@ class Creator {
 protected:
     std::vector<std::string> mTextures = {};
 
+    virtual sCar* FactoryMethod() const { return nullptr; };
+
 public:
     ~Creator() {
         mTextures = {};
     }
 
-    virtual sCar* FactoryMethod() const { return nullptr; };
+    sCar* GetObject() const {
+        sCar *car = FactoryMethod();
+        if (mTextures.size()) {
+            std::srand(std::time(nullptr));
+            auto n = std::rand()/((RAND_MAX + 1u)/(mTextures.size() - 1));
+            car->loadTexture(mTextures[n]);
+            //todo load random textures
+            //todo set random position
+        }
+        return car;
+    };
+
 
     void SetTextures(const std::vector<std::string> textures) {
         mTextures = textures;
     }
+
     void SetTransform() {
         //todo set random position
     }
 
-    sTransform getRandomPosition() {
+    sTransform GetRandomPosition() {
         std::srand(std::time(nullptr));
         sTransform *transform;
         //TODO
@@ -172,21 +194,21 @@ public:
 };
 
 class GasEngineCreator : public Creator {
-public:
+private:
     sCar* FactoryMethod() const {
         return new sGasEngine();
     }
 };
 
 class ElectroCarCreator : public Creator {
-public:
+private:
     sCar* FactoryMethod() const {
         return new sElectroCar();
     }
 };
 
 class HybridCarCreator : public Creator {
-public:
+private:
     sCar* FactoryMethod() const {
         return new sHybridCar();
     }
@@ -217,7 +239,7 @@ public:
 
         std::srand(std::time(nullptr));
         auto n = std::rand()/((RAND_MAX + 1u)/(carTypes.size() - 1));
-        auto *car = carTypes[n]->FactoryMethod();
+        auto *car = carTypes[n]->GetObject();
         //Manipulation on car
 //        car->transform = transform;
         //Store in manager array
@@ -229,3 +251,5 @@ public:
     }
 
 };
+
+#endif //CAR_EXAMPLE_TASK_HPP

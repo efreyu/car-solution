@@ -12,6 +12,7 @@ project(${PROJECT_NAME}
 #------------------------------------------------------------------------------
 add_executable(${PROJECT_NAME}
         src/Classes/Game.cpp
+        src/Classes/LoadManager.cpp src/Classes/LoadManager.h
         src/task.hpp
         src/main.cpp
         )
@@ -149,7 +150,7 @@ else() # Not Web
     # Tests section
     #------------------------------------------------------------------------------
 
-    enable_testing()
-    add_subdirectory(tests)
+#    enable_testing()
+#    add_subdirectory(tests)
 
 endif()

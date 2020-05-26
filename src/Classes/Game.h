@@ -40,7 +40,7 @@ private:
     /**
      * Debug mode
      */
-    static const auto mIsDebug = debugMode;
+    const bool mIsDebug = debugMode;
 
 public:
     Game();
