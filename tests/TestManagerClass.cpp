@@ -8,12 +8,19 @@ int main(int argc, char** argv) {
     return RUN_ALL_TESTS();
 }
 
-class TestManagerClass : public Manager {
-public:
-    int getCountRegisteredCar() {
-        return this->carTypes.size();
-    }
-};
+namespace TestCarExample {
+
+    class TestManagerClass : public Manager {
+    public:
+        int getCountRegisteredCar() {
+            return this->carTypes.size();
+        }
+        int getCountSpawnedCar() {
+            return this->cars.size();
+        }
+    };
+
+}
 
 
 TEST(TestGameClass, TestGameClassInit) {
@@ -22,7 +29,13 @@ TEST(TestGameClass, TestGameClassInit) {
 }
 
 TEST(TestManagerClass, TestAddCarType) {
-    TestManagerClass manager1;
+    /**
+     * Register car types
+     */
+    TestCarExample::TestManagerClass manager1;
+
+    ASSERT_TRUE(manager1.getCountSpawnedCar() == 0);
+
     std::vector<std::string> textures = {
             "resources/sprites/Gas/grey.png",
             "resources/sprites/Gas/red.png",
@@ -46,5 +59,13 @@ TEST(TestManagerClass, TestAddCarType) {
     });
     ASSERT_TRUE(manager1.getCountRegisteredCar() == 3);
 
+    /**
+     * Spawn cars
+     */
+     ASSERT_TRUE(manager1.getCountSpawnedCar() == 0);
+     manager1.SpawnCar();
+     ASSERT_TRUE(manager1.getCountSpawnedCar() == 1);
 
+     manager1.SpawnCar(2);
+     ASSERT_TRUE(manager1.getCountSpawnedCar() == 3);
 }

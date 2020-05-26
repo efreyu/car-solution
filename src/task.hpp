@@ -163,6 +163,12 @@ public:
         //todo set random position
     }
 
+    sTransform getRandomPosition() {
+        std::srand(std::time(nullptr));
+        sTransform *transform;
+        //TODO
+    }
+
 };
 
 class GasEngineCreator : public Creator {
@@ -204,6 +210,22 @@ public:
         car->SetTextures(arg);
         //Store in manager array
         carTypes.emplace_back(car);
+    }
+
+    void SpawnCar() {
+        if (!carTypes.size()) return;
+
+        std::srand(std::time(nullptr));
+        auto n = std::rand()/((RAND_MAX + 1u)/(carTypes.size() - 1));
+        auto *car = carTypes[n]->FactoryMethod();
+        //Manipulation on car
+//        car->transform = transform;
+        //Store in manager array
+        cars.emplace_back(car);
+    }
+
+    void SpawnCar(int n) {
+        for (int i = 0; i < n; i++) SpawnCar();
     }
 
 };
