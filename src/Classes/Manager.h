@@ -10,7 +10,10 @@ class Manager {
 protected:
     std::vector<Creator*> carTypes;
     std::vector<sCar*> cars;
+    SDL_Renderer &renderer;
 public:
+
+    Manager(SDL_Renderer &sdlRenderer) : renderer(sdlRenderer) {}
 
     void move()
     {

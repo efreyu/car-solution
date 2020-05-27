@@ -4,14 +4,8 @@
 
 SDL_Renderer* Game::mRenderer = nullptr;
 
-Game::Game() {
-    mManager = new Manager();
-    mManager->RegisterCarType<GasEngineCreator>((std::vector<std::string>){
-        "resources/sprites/Gas/grey.png",
-        "resources/sprites/Gas/red.png",
-        "resources/sprites/Gas/white.png"
-    });
-}
+Game::Game() {}
+
 Game::~Game() {}
 
 void Game::Init(const char *title, int xPosition, int yPosition, int width, int height, bool fullscreen) {
@@ -45,6 +39,13 @@ void Game::Init(const char *title, int xPosition, int yPosition, int width, int 
     } else {
         mIsRunning = false;
     }
+
+    mManager = new Manager(*mRenderer);
+    mManager->RegisterCarType<GasEngineCreator>((std::vector<std::string>){
+            "resources/sprites/Gas/grey.png",
+            "resources/sprites/Gas/red.png",
+            "resources/sprites/Gas/white.png"
+    });
 
 }
 
