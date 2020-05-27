@@ -1,9 +1,10 @@
-/* Created by efreyu on 26.05.2020. */
-#pragma once
+#ifndef CAR_EXAMPLE_SCARS_H
+#define CAR_EXAMPLE_SCARS_H
+
 
 #include "Transform.h"
-#include "Game.h"
-#include "LoadManager.h"
+
+//#include "LoadManager.h"
 
 struct sCar {
 private:
@@ -23,8 +24,9 @@ public:
 
     void loadTexture(std::string path) {
         const char* c = path.c_str();
-        auto *load = new LoadManager();
+//        auto *load = new LoadManager();
 //        texture = LoadManager::LoadTexture(c/*(const char*)path.c_str()*/);
+
     }
 
     void draw() {
@@ -115,3 +117,5 @@ public:
             sGasEngine::fuelBurn();
     }
 };
+
+#endif //CAR_EXAMPLE_SCARS_H

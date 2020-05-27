@@ -1,5 +1,5 @@
-/* Created by efreyu on 26.05.2020. */
-#pragma once
+#ifndef CAR_EXAMPLE_MANAGER_H
+#define CAR_EXAMPLE_MANAGER_H
 
 #include <vector>
 #include <string>
@@ -43,3 +43,6 @@ public:
     }
 
 };
+
+
+#endif //CAR_EXAMPLE_MANAGER_H

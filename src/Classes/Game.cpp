@@ -5,12 +5,12 @@
 SDL_Renderer* Game::mRenderer = nullptr;
 
 Game::Game() {
-//    mManager = new Manager();
-//    mManager->RegisterCarType<GasEngineCreator>((std::vector<std::string>){
-//        "resources/sprites/Gas/grey.png",
-//        "resources/sprites/Gas/red.png",
-//        "resources/sprites/Gas/white.png"
-//    });
+    mManager = new Manager();
+    mManager->RegisterCarType<GasEngineCreator>((std::vector<std::string>){
+        "resources/sprites/Gas/grey.png",
+        "resources/sprites/Gas/red.png",
+        "resources/sprites/Gas/white.png"
+    });
 }
 Game::~Game() {}
 

@@ -1,15 +1,14 @@
-/* Created by efreyu on 24.05.2020. */
-#pragma once
+#ifndef CAR_EXAMPLE_GAME_H
+#define CAR_EXAMPLE_GAME_H
 
 #include <iostream>
 #include <SDL2/SDL.h>
-#include "Manager.h"
 #if defined(__APPLE__)
 #include <SDL2_image/SDL_image.h>
 #else
 #include <SDL2/SDL_image.h>
 #endif //__APPLE__
-
+#include "Manager.h"
 #if defined(__EMSCRIPTEN__)
 #include <emscripten.h>
 #define EMSCRIPTEN_FLAG 0;
@@ -74,3 +73,5 @@ public:
     constexpr bool isEmscripten() { return mIsEmscripten; }
     constexpr bool isDebug() { return mIsDebug; }
 };
+
+#endif //CAR_EXAMPLE_GAME_H

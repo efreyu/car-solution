@@ -1,5 +1,5 @@
-/* Created by efreyu on 26.05.2020. */
-#pragma once
+#ifndef CAR_EXAMPLE_CREATOR_H
+#define CAR_EXAMPLE_CREATOR_H
 
 #include <vector>
 #include "Transform.h"
@@ -64,3 +64,5 @@ private:
         return new sHybridCar();
     }
 };
+
+#endif //CAR_EXAMPLE_CREATOR_H

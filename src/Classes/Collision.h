@@ -1,5 +1,6 @@
-/* Created by efreyu on 26.05.2020. */
-#pragma once
+#ifndef CAR_EXAMPLE_COLLISION_H
+#define CAR_EXAMPLE_COLLISION_H
+
 #include "Transform.h"
 
 class Collision {
@@ -15,3 +16,5 @@ public:
                transformB.y + transformB.height >= transformA.y;
     }
 };
+
+#endif //CAR_EXAMPLE_COLLISION_H

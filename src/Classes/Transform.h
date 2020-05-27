@@ -1,5 +1,5 @@
-/* Created by efreyu on 26.05.2020. */
-#pragma once
+#ifndef CAR_EXAMPLE_TRANSFORM_H
+#define CAR_EXAMPLE_TRANSFORM_H
 
 enum eDirection : std::size_t {
     UP, RIGHT, DOWN, LEFT
@@ -19,3 +19,5 @@ public:
             , direction(transformDirection)
     {};
 };
+
+#endif //CAR_EXAMPLE_TRANSFORM_H
