@@ -15,11 +15,15 @@ protected:
 public:
 
     void Update() {
-        for (auto& gameObject : gameObjects) gameObject->Update();
+        for (auto& gameObject : gameObjects) {
+            if (gameObject->isActive) gameObject->Update();
+        }
     }
 
     void Draw() {
-        for (auto& gameObject : gameObjects) gameObject->Draw();
+        for (auto& gameObject : gameObjects) {
+            if (gameObject->isActive) gameObject->Draw();
+        }
     }
 
     template <typename T1, typename T2>

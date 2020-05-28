@@ -2,7 +2,7 @@
 #define CAR_EXAMPLE_SCARS_H
 
 #include "GameObject.h"
-#include "Transform.h"
+#include "sTransform.h"
 
 struct sCar : GameObject {
 private:
@@ -17,37 +17,33 @@ public:
         this->transform = sTransform;
     };
 
-    void draw() {
-        //
-    }
-
     void Update() {
         switch (transform.direction) {
             case eDirection::UP:
-                transform.y += getSpeed();
+                transform.y += GetSpeed();
                 break;
             case eDirection::RIGHT:
-                transform.x += getSpeed();
+                transform.x += GetSpeed();
                 break;
             case eDirection::DOWN:
-                transform.y -= getSpeed();
+                transform.y -= GetSpeed();
                 break;
             case eDirection::LEFT:
-                transform.x -= getSpeed();
+                transform.x -= GetSpeed();
                 break;
         }
-        fuelBurn();
+        FuelBurn();
     }
 
-    int getSpeed() { return this->getFuel() > 0 ? speed : minSpeed; };
+    int GetSpeed() { return this->GetFuel() > 0 ? speed : minSpeed; };
 
-    void setSpeed(int i) { speed = i; };
+    void SetSpeed(int i) { speed = i; };
 
-    virtual void fuelBurn() = 0;
+    virtual void FuelBurn() = 0;
 
-    virtual int getFuel() = 0;
+    virtual int GetFuel() = 0;
 
-    virtual void refill(int count) = 0;
+    virtual void Refill(int count) = 0;
 };
 
 struct sGasEngine : virtual public sCar {
@@ -57,11 +53,11 @@ protected:
 public:
     sGasEngine() : fuel(0) {}
 
-    int getFuel() override { return fuel; }
+    int GetFuel() override { return fuel; }
 
-    void refill(int count) override { fuel += count; }
+    void Refill(int count) override { fuel += count; }
 
-    void fuelBurn() override {
+    void FuelBurn() override {
         if (fuel > 0) fuel--;
     }
 };
@@ -73,11 +69,11 @@ protected:
 public:
     sElectroCar() : charge(0) {};
 
-    int getFuel() override { return charge; }
+    int GetFuel() override { return charge; }
 
-    void refill(int count) override { charge += count; }
+    void Refill(int count) override { charge += count; }
 
-    void fuelBurn() override {
+    void FuelBurn() override {
         if (charge > 0) charge--;
     }
 };
@@ -89,20 +85,20 @@ public:
         sElectroCar();
     }
 
-    void refill(int count) override {
+    void Refill(int count) override {
         /* When we pass an odd number we always lose 1, due to int type casting.
          * The solution is to change the int to float for storing fuel, or use a temporary float variable.
          */
         charge += count / 2; fuel += count / 2;
     }
 
-    int getFuel() override { return charge + fuel; }
+    int GetFuel() override { return charge + fuel; }
 
-    void fuelBurn() override {
+    void FuelBurn() override {
         if (rand() % 2 == 0)
-            sElectroCar::fuelBurn();
+            sElectroCar::FuelBurn();
         else
-            sGasEngine::fuelBurn();
+            sGasEngine::FuelBurn();
     }
 };
 

@@ -1,7 +1,7 @@
 #ifndef CAR_EXAMPLE_GAMEOBJECT_H
 #define CAR_EXAMPLE_GAMEOBJECT_H
 
-#include "Transform.h"
+#include "sTransform.h"
 #include "LoadManager.h"
 
 class GameObject {
@@ -26,7 +26,7 @@ public:
         //TODO call this when GO was spawned
     }
 
-    void Update();
+    virtual void Update() {}
 
     void Draw() {
         LoadManager::Draw(texture, srcRect, destRect);

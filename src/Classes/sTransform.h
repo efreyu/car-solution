@@ -1,5 +1,5 @@
-#ifndef CAR_EXAMPLE_TRANSFORM_H
-#define CAR_EXAMPLE_TRANSFORM_H
+#ifndef CAR_EXAMPLE_STRANSFORM_H
+#define CAR_EXAMPLE_STRANSFORM_H
 
 enum eDirection : std::size_t {
     UP, RIGHT, DOWN, LEFT
@@ -20,4 +20,4 @@ public:
     {};
 };
 
-#endif //CAR_EXAMPLE_TRANSFORM_H
+#endif //CAR_EXAMPLE_STRANSFORM_H

@@ -1,7 +1,7 @@
 /* Created by efreyu on 23.05.2020. */
 #include <gtest/gtest.h>
-#include "../src/task.hpp"
 #include "../src/Classes/Game.h"
+#include "../src/Classes/Manager.h"
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
@@ -16,7 +16,7 @@ namespace TestCarExample {
             return this->carTypes.size();
         }
         int getCountSpawnedCar() {
-            return this->cars.size();
+            return this->gameObjects.size();
         }
     };
 

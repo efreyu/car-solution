@@ -1,6 +1,6 @@
 /* Created by efreyu on 22.05.2020. */
 #include <gtest/gtest.h>
-#include "../src/task.hpp"
+#include "../src/Classes/sCars.h"
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
@@ -16,13 +16,13 @@ TEST(TestStructCar, TestStructGasEngine) {
      * Gas Engine Car, fuel and speed test
      */
     sGasEngine car1;
-    ASSERT_TRUE(car1.getFuel() == 0);
-    car1.refill(fuel);
-    ASSERT_TRUE(car1.getFuel() == fuel);
-    car1.move();
-    ASSERT_TRUE(car1.getFuel() == fuel - 1);
-    car1.setSpeed(speed);
-    ASSERT_TRUE(car1.getSpeed() == speed);
+    ASSERT_TRUE(car1.GetFuel() == 0);
+    car1.Refill(fuel);
+    ASSERT_TRUE(car1.GetFuel() == fuel);
+    car1.Update();
+    ASSERT_TRUE(car1.GetFuel() == fuel - 1);
+    car1.SetSpeed(speed);
+    ASSERT_TRUE(car1.GetSpeed() == speed);
 }
 
 TEST(TestStructCar, TestStructElectroCar) {
@@ -30,13 +30,13 @@ TEST(TestStructCar, TestStructElectroCar) {
      * Electro Car, fuel and speed test
      */
     sElectroCar car2;
-    ASSERT_TRUE(car2.getFuel() == 0);
-    car2.refill(fuel);
-    ASSERT_TRUE(car2.getFuel() == fuel);
-    car2.move();
-    ASSERT_TRUE(car2.getFuel() == fuel - 1);
-    car2.setSpeed(speed - 2);
-    ASSERT_TRUE(car2.getSpeed() == speed - 2);
+    ASSERT_TRUE(car2.GetFuel() == 0);
+    car2.Refill(fuel);
+    ASSERT_TRUE(car2.GetFuel() == fuel);
+    car2.Update();
+    ASSERT_TRUE(car2.GetFuel() == fuel - 1);
+    car2.SetSpeed(speed - 2);
+    ASSERT_TRUE(car2.GetSpeed() == speed - 2);
 }
 
 TEST(TestStructCar, TestStructHybridCar) {
@@ -44,13 +44,13 @@ TEST(TestStructCar, TestStructHybridCar) {
      * Hybrid Car, fuel and speed test
      */
     sHybridCar car3;
-    ASSERT_TRUE(car3.getFuel() == 0);
-    car3.refill(fuel);
-    ASSERT_TRUE(car3.getFuel() == fuel / 2 + fuel / 2);
-    car3.move();
-    ASSERT_TRUE(car3.getFuel() == fuel / 2 + fuel / 2 - 1);
-    car3.setSpeed(speed - 2);
-    ASSERT_TRUE(car3.getSpeed() == speed - 2);
+    ASSERT_TRUE(car3.GetFuel() == 0);
+    car3.Refill(fuel);
+    ASSERT_TRUE(car3.GetFuel() == fuel / 2 + fuel / 2);
+    car3.Update();
+    ASSERT_TRUE(car3.GetFuel() == fuel / 2 + fuel / 2 - 1);
+    car3.SetSpeed(speed - 2);
+    ASSERT_TRUE(car3.GetSpeed() == speed - 2);
 }
 
 TEST(TestStructCar, TestStructCarConstruct) {
@@ -61,27 +61,27 @@ TEST(TestStructCar, TestStructCarConstruct) {
     sElectroCar *electroCar = new sElectroCar();
     sHybridCar *hybridCar = new sHybridCar();
 
-    ASSERT_TRUE(gasCar->getSpeed() == minSpeed);
-    ASSERT_TRUE(electroCar->getSpeed() == minSpeed);
-    ASSERT_TRUE(hybridCar->getSpeed() == minSpeed);
+    ASSERT_TRUE(gasCar->GetSpeed() == minSpeed);
+    ASSERT_TRUE(electroCar->GetSpeed() == minSpeed);
+    ASSERT_TRUE(hybridCar->GetSpeed() == minSpeed);
 
-    gasCar->setSpeed(2);
-    gasCar->refill(fuel);
-    ASSERT_TRUE(gasCar->getSpeed() == 2);
-    ASSERT_TRUE(electroCar->getSpeed() == minSpeed);
-    ASSERT_TRUE(hybridCar->getSpeed() == minSpeed);
+    gasCar->SetSpeed(2);
+    gasCar->Refill(fuel);
+    ASSERT_TRUE(gasCar->GetSpeed() == 2);
+    ASSERT_TRUE(electroCar->GetSpeed() == minSpeed);
+    ASSERT_TRUE(hybridCar->GetSpeed() == minSpeed);
 
-    electroCar->setSpeed(3);
-    electroCar->refill(5);
-    ASSERT_TRUE(gasCar->getSpeed() == 2);
-    ASSERT_TRUE(electroCar->getSpeed() == 3);
-    ASSERT_TRUE(hybridCar->getSpeed() == minSpeed);
+    electroCar->SetSpeed(3);
+    electroCar->Refill(5);
+    ASSERT_TRUE(gasCar->GetSpeed() == 2);
+    ASSERT_TRUE(electroCar->GetSpeed() == 3);
+    ASSERT_TRUE(hybridCar->GetSpeed() == minSpeed);
 
-    hybridCar->setSpeed(4);
-    hybridCar->refill(fuel);
-    ASSERT_TRUE(gasCar->getSpeed() == 2);
-    ASSERT_TRUE(electroCar->getSpeed() == 3);
-    ASSERT_TRUE(hybridCar->getSpeed() == 4);
+    hybridCar->SetSpeed(4);
+    hybridCar->Refill(fuel);
+    ASSERT_TRUE(gasCar->GetSpeed() == 2);
+    ASSERT_TRUE(electroCar->GetSpeed() == 3);
+    ASSERT_TRUE(hybridCar->GetSpeed() == 4);
 }
 
 TEST(TestStructCar, TestStructCarMove) {
@@ -90,24 +90,24 @@ TEST(TestStructCar, TestStructCarMove) {
      */
     sTransform *transform = new sTransform(50, 50, 100, 100);
     sHybridCar *hybridCar = new sHybridCar();
-    hybridCar->setSpeed(speed);
+    hybridCar->SetSpeed(speed);
     hybridCar->transform = *transform;
     hybridCar->transform.direction = eDirection::DOWN;
-    hybridCar->move();
+    hybridCar->Update();
     hybridCar->transform.direction = eDirection::RIGHT;
-    hybridCar->move();
+    hybridCar->Update();
     ASSERT_TRUE(hybridCar->transform.y == transform->y - minSpeed);
     ASSERT_TRUE(hybridCar->transform.x == transform->x + minSpeed);
 
     sGasEngine *gasEngineCar = new sGasEngine();
-    gasEngineCar->setSpeed(speed);
+    gasEngineCar->SetSpeed(speed);
     gasEngineCar->transform = *transform;
     gasEngineCar->transform.direction = eDirection::UP;
-    gasEngineCar->move();
+    gasEngineCar->Update();
     gasEngineCar->transform.direction = eDirection::LEFT;
-    gasEngineCar->move();
+    gasEngineCar->Update();
     ASSERT_TRUE(gasEngineCar->transform.y == transform->y + minSpeed);
     ASSERT_TRUE(gasEngineCar->transform.x == transform->x - minSpeed);
-    //TODO test getFuel and fuelBurn
-//    EXPECT_EQ(hybridCar->getFuel(), -1);
+    //TODO test GetFuel and FuelBurn
+//    EXPECT_EQ(hybridCar->GetFuel(), -1);
 }

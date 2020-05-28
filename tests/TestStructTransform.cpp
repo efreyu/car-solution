@@ -1,6 +1,7 @@
 /* Created by efreyu on 22.05.2020. */
 #include <gtest/gtest.h>
-#include "../src/task.hpp"
+#include "../src/Classes/sTransform.h"
+#include "../src/Classes/Collision.h"
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
