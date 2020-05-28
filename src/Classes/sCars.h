@@ -1,39 +1,27 @@
 #ifndef CAR_EXAMPLE_SCARS_H
 #define CAR_EXAMPLE_SCARS_H
 
-
+#include "GameObject.h"
 #include "Transform.h"
 
-//#include "LoadManager.h"
-
-struct sCar {
+struct sCar : GameObject {
 private:
     int speed;
     int minSpeed = 1;
 
 public:
-    sTransform transform;
-    SDL_Texture *texture{};
-    SDL_Rect srcRect{}, destRect{};
 
     sCar() { speed = 0; };
-    sCar(int speed, sTransform transform) : speed(speed), transform(transform) {};
-    ~sCar() {
-        SDL_DestroyTexture(texture);
-    }
-
-    void loadTexture(std::string path) {
-        const char* c = path.c_str();
-//        auto *load = new LoadManager();
-//        texture = LoadManager::LoadTexture(c/*(const char*)path.c_str()*/);
-
-    }
+    sCar(int speed, sTransform sTransform) {
+        this->speed = speed;
+        this->transform = sTransform;
+    };
 
     void draw() {
-//        LoadManager::Draw(texture, srcRect, destRect);
+        //
     }
 
-    void move() {
+    void Update() {
         switch (transform.direction) {
             case eDirection::UP:
                 transform.y += getSpeed();

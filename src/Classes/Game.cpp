@@ -1,6 +1,9 @@
 /* Created by efreyu on 24.05.2020. */
 
 #include "Game.h"
+#include "Manager.h"
+
+auto manager = new Manager;
 
 SDL_Renderer* Game::mRenderer = nullptr;
 
@@ -40,8 +43,7 @@ void Game::Init(const char *title, int xPosition, int yPosition, int width, int 
         mIsRunning = false;
     }
 
-    mManager = new Manager(*mRenderer);
-    mManager->RegisterCarType<GasEngineCreator>((std::vector<std::string>){
+    manager->RegisterCarType<GasEngineCreator>((std::vector<std::string>){
             "resources/sprites/Gas/grey.png",
             "resources/sprites/Gas/red.png",
             "resources/sprites/Gas/white.png"
@@ -61,11 +63,13 @@ void Game::HandleEvents() {
     }
 }
 
-void Game::Update() {}
+void Game::Update() {
+    manager->Update();
+}
 
 void Game::Render() {
     SDL_RenderClear(mRenderer);
-    //
+    manager->Draw();
     SDL_RenderPresent(mRenderer);
 }
 

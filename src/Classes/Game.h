@@ -8,7 +8,6 @@
 #else
 #include <SDL2/SDL_image.h>
 #endif //__APPLE__
-#include "Manager.h"
 #if defined(__EMSCRIPTEN__)
 #include <emscripten.h>
 #define EMSCRIPTEN_FLAG 0;
@@ -44,7 +43,6 @@ public:
     ~Game();
 
     static SDL_Renderer *mRenderer;
-    Manager *mManager;
     SDL_Event mEvent;
 
     void Init(const char *title, int xPosition, int yPosition, int width, int height, bool fullscreen);

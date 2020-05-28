@@ -20,7 +20,7 @@ public:
         if (mTextures.size()) {
             std::srand(std::time(nullptr));
             auto n = std::rand()/((RAND_MAX + 1u)/(mTextures.size() - 1));
-            car->loadTexture(mTextures[n]);
+            car->LoadTexture(mTextures[n]);
             //todo load random textures
             //todo set random position
         }

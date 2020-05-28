@@ -4,20 +4,22 @@
 #include <vector>
 #include <string>
 #include "sCars.h"
+#include "GameObject.h"
 #include "Creator.h"
 
 class Manager {
 protected:
     std::vector<Creator*> carTypes;
-    std::vector<sCar*> cars;
-    SDL_Renderer &renderer;
+    std::vector<GameObject*> gameObjects;
+
 public:
 
-    Manager(SDL_Renderer &sdlRenderer) : renderer(sdlRenderer) {}
+    void Update() {
+        for (auto& gameObject : gameObjects) gameObject->Update();
+    }
 
-    void move()
-    {
-        for (auto& car : cars) car->move();
+    void Draw() {
+        for (auto& gameObject : gameObjects) gameObject->Draw();
     }
 
     template <typename T1, typename T2>
@@ -38,7 +40,7 @@ public:
         //Manipulation on car
 //        car->transform = transform;
         //Store in manager array
-        cars.emplace_back(car);
+        gameObjects.emplace_back(car);
     }
 
     void SpawnCar(int n) {
