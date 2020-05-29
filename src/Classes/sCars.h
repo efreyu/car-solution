@@ -11,10 +11,10 @@ private:
 
 public:
 
-    sCar() { speed = 0; };
+    sCar() { speed = minSpeed; };
     sCar(int speed, sTransform sTransform) {
-        this->speed = speed;
-        this->transform = sTransform;
+        speed = speed;
+        transform = sTransform;
     };
 
     void Update() {

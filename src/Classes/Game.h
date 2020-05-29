@@ -71,7 +71,15 @@ public:
     }
 
     static std::pair<int, int> GetWindowResolution() {
-        return std::make_pair(mWidth, mHeight);
+        int w, h;
+        SDL_GetRendererOutputSize(mRenderer, &w, &h);
+        if (SDL_GetRendererOutputSize(mRenderer, &w, &h) == 0) {
+            //Client window is high dpi device
+            return std::make_pair(w, h);
+        } else {
+            //Unable to get the actual area size in pixels, so the resolution is 1:1
+            return std::make_pair(mWidth, mHeight);
+        }
     }
 
     bool isRunning() { return mIsRunning; }
