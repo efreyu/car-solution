@@ -27,8 +27,8 @@ public:
     }
 
     void UpdateObject() {
-        UpdateTransform();
         Update();
+        UpdateTransform();
     }
 
     virtual void Update() {}
@@ -45,6 +45,8 @@ private:
         srcRect.h = transform.height;
         destRect.w = transform.width * transform.scale;
         destRect.h = transform.height * transform.scale;
+        destRect.x = transform.x;
+        destRect.y = transform.y;
     }
 };
 

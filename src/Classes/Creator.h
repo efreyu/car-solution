@@ -15,11 +15,11 @@ public:
         mTextures = {};
     }
 
-    GameObject* GetObject() const {
+    sCar* GetObject() const {
         sCar *car = FactoryMethod();
         if (mTextures.size()) {
             std::srand(std::time(nullptr));
-            auto n = std::rand()/((RAND_MAX + 1u)/(mTextures.size()));
+            auto n = std::rand() % mTextures.size(); //in the range 0 to vector length
             car->LoadTexture(mTextures[n]);
             //todo set random position
             //todo after all set active

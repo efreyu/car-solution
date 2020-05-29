@@ -20,13 +20,13 @@ public:
     void Update() {
         switch (transform.direction) {
             case eDirection::UP:
-                transform.y += GetSpeed();
+                transform.y -= GetSpeed();
                 break;
             case eDirection::RIGHT:
                 transform.x += GetSpeed();
                 break;
             case eDirection::DOWN:
-                transform.y -= GetSpeed();
+                transform.y += GetSpeed();
                 break;
             case eDirection::LEFT:
                 transform.x -= GetSpeed();
@@ -35,7 +35,7 @@ public:
         FuelBurn();
     }
 
-    int GetSpeed() { return this->GetFuel() > 0 ? speed : minSpeed; };
+    int GetSpeed() { return GetFuel() > 0 ? speed : minSpeed; };
 
     void SetSpeed(int i) { speed = i; };
 

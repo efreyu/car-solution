@@ -39,10 +39,15 @@ public:
         if (!carTypes.size()) return;
 
         std::srand(std::time(nullptr));
-        auto n = std::rand()/((RAND_MAX + 1u)/carTypes.size());
+        auto n = std::rand() % carTypes.size();
         auto *car = carTypes[n]->GetObject();
         //Manipulation on car
-//        car->transform = transform;
+        car->transform.x = 50;
+        car->transform.y = 50;
+        car->transform.width = 70;
+        car->transform.height = 165;
+        car->transform.direction = eDirection::DOWN;
+        car->Refill(20);
         //Store in manager array
         gameObjects.emplace_back(car);
     }

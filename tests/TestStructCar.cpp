@@ -96,7 +96,7 @@ TEST(TestStructCar, TestStructCarMove) {
     hybridCar->Update();
     hybridCar->transform.direction = eDirection::RIGHT;
     hybridCar->Update();
-    ASSERT_TRUE(hybridCar->transform.y == transform->y - minSpeed);
+    ASSERT_TRUE(hybridCar->transform.y == transform->y + minSpeed);
     ASSERT_TRUE(hybridCar->transform.x == transform->x + minSpeed);
 
     sGasEngine *gasEngineCar = new sGasEngine();
@@ -106,7 +106,7 @@ TEST(TestStructCar, TestStructCarMove) {
     gasEngineCar->Update();
     gasEngineCar->transform.direction = eDirection::LEFT;
     gasEngineCar->Update();
-    ASSERT_TRUE(gasEngineCar->transform.y == transform->y + minSpeed);
+    ASSERT_TRUE(gasEngineCar->transform.y == transform->y - minSpeed);
     ASSERT_TRUE(gasEngineCar->transform.x == transform->x - minSpeed);
     //TODO test GetFuel and FuelBurn
 //    EXPECT_EQ(hybridCar->GetFuel(), -1);
