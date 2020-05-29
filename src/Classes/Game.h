@@ -22,10 +22,11 @@ const bool debugMode = false;
 #endif
 
 class Game {
-private:
+protected:
     bool mIsEmscripten;
     bool mIsRunning = false;
     SDL_Window *mWindow;
+    static int mWidth, mHeight;
     /**
      * Frame Limiting
      */
@@ -47,8 +48,12 @@ public:
 
     void Init(const char *title, int xPosition, int yPosition, int width, int height, bool fullscreen);
 
+    void RegisterObjects();
+
     void WindowResize(int width, int height) {
         SDL_SetWindowSize(mWindow, width, height);
+        mWidth = width;
+        mHeight = height;
     }
 
     void HandleEvents();
@@ -65,7 +70,9 @@ public:
         SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, 255);
     }
 
-    static SDL_Renderer* GetRenderer() { return mRenderer; }//TODO test
+    static std::pair<int, int> GetWindowResolution() {
+        return std::make_pair(mWidth, mHeight);
+    }
 
     bool isRunning() { return mIsRunning; }
     constexpr bool isEmscripten() { return mIsEmscripten; }

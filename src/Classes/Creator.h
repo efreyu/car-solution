@@ -19,10 +19,11 @@ public:
         sCar *car = FactoryMethod();
         if (mTextures.size()) {
             std::srand(std::time(nullptr));
-            auto n = std::rand()/((RAND_MAX + 1u)/(mTextures.size() - 1));
+            auto n = std::rand()/((RAND_MAX + 1u)/(mTextures.size()));
             car->LoadTexture(mTextures[n]);
-            //todo load random textures
             //todo set random position
+            //todo after all set active
+            car->isActive = true;
         }
         return car;
     };

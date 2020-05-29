@@ -16,7 +16,7 @@ public:
 
     void Update() {
         for (auto& gameObject : gameObjects) {
-            if (gameObject->isActive) gameObject->Update();
+            if (gameObject->isActive) gameObject->UpdateObject();
         }
     }
 
@@ -39,7 +39,7 @@ public:
         if (!carTypes.size()) return;
 
         std::srand(std::time(nullptr));
-        auto n = std::rand()/((RAND_MAX + 1u)/(carTypes.size() - 1));
+        auto n = std::rand()/((RAND_MAX + 1u)/carTypes.size());
         auto *car = carTypes[n]->GetObject();
         //Manipulation on car
 //        car->transform = transform;

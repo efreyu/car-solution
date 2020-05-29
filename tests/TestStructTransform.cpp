@@ -17,12 +17,14 @@ TEST(TestStructMain, TestStructTransformCollision) {
                 && transform1.y == 0
                 && transform1.width == 0
                 && transform1.height == 0
+                && transform1.scale == 1
                 );
     auto *transform2 = new sTransform(0, 0, 100, 100);
     ASSERT_TRUE( transform2->x == 0
                  && transform2->y == 0
                  && transform2->width == 100
                  && transform2->height == 100
+                 && transform2->scale == 1
     );
 
     /*

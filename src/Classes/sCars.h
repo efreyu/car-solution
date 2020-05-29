@@ -4,7 +4,7 @@
 #include "GameObject.h"
 #include "sTransform.h"
 
-struct sCar : GameObject {
+struct sCar : public GameObject {
 private:
     int speed;
     int minSpeed = 1;

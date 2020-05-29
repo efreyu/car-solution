@@ -4,8 +4,12 @@
 #include "Manager.h"
 
 auto manager = new Manager;
-
+/*
+ * Define static
+ */
 SDL_Renderer* Game::mRenderer = nullptr;
+int Game::mWidth = 0;
+int Game::mHeight = 0;
 
 Game::Game() {}
 
@@ -38,17 +42,23 @@ void Game::Init(const char *title, int xPosition, int yPosition, int width, int 
         } else {
             std::cout << "Warning: renderer was not created!" << std::endl;
         }
+        mWidth = width;
+        mHeight = height;
         mIsRunning = true;
+        RegisterObjects();
     } else {
         mIsRunning = false;
     }
 
+}
+
+void Game::RegisterObjects() {
     manager->RegisterCarType<GasEngineCreator>((std::vector<std::string>){
             "resources/sprites/Gas/grey.png",
             "resources/sprites/Gas/red.png",
             "resources/sprites/Gas/white.png"
     });
-
+    manager->SpawnCar();
 }
 
 void Game::HandleEvents() {

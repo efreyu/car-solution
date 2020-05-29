@@ -26,10 +26,25 @@ public:
         //TODO call this when GO was spawned
     }
 
+    void UpdateObject() {
+        UpdateTransform();
+        Update();
+    }
+
     virtual void Update() {}
 
     void Draw() {
         LoadManager::Draw(texture, srcRect, destRect);
+    }
+
+private:
+    void UpdateTransform() {
+        srcRect.x = 0;
+        srcRect.y = 0;
+        srcRect.w = transform.width;
+        srcRect.h = transform.height;
+        destRect.w = transform.width * transform.scale;
+        destRect.h = transform.height * transform.scale;
     }
 };
 

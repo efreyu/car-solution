@@ -61,12 +61,23 @@ namespace TestCarExample {
             "resources/sprites/Hybrid/while.png"
     };
 
+    class TestGameClass : public Game {
+    public:
+        void SetupWindowResolution(int width, int height) {
+            mWidth = width;
+            mHeight = height;
+        }
+    };
+
 }
 
 
 TEST(TestGameClass, TestGameClassInit) {
-    Game *game = new Game();
+    auto game = new TestCarExample::TestGameClass();
     ASSERT_FALSE(game->isRunning());
+    game->SetupWindowResolution(100, 150);
+    auto resolution = game->GetWindowResolution();
+    ASSERT_TRUE(resolution.first == 100 && resolution.second == 150);
 }
 
 TEST(TestManagerClass, TestAddCarType) {
@@ -112,8 +123,10 @@ TEST(TestManagerClass, TestFactoryClass) {
     hybridCar->SetTextures(TestCarExample::hybridCarTextures);
     EXPECT_EQ(hybridCar->getCountRegisteredTextures(),
               TestCarExample::hybridCarTextures.size());
-
-//    Todo test create object
+    
     GameObject *car1 = gasEngineCar->GetObject();
+
+    ASSERT_TRUE(car1->isActive);
+    ASSERT_FALSE(car1->isDestroyed);
 
 }

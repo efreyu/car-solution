@@ -7,16 +7,17 @@ enum eDirection : std::size_t {
 
 struct sTransform {
 public:
-    int x, y, width, height;
+    int x, y, width, height, scale;
     eDirection direction;
 
-    sTransform() { x = y = width = height = 0; direction = eDirection::DOWN; }
-    sTransform(int transformX, int transformY, int transformWidth, int transformHeight, eDirection transformDirection = eDirection::DOWN)
+    sTransform() { x = y = width = height = 0; scale = 1; direction = eDirection::DOWN; }
+    sTransform(int transformX, int transformY, int transformWidth, int transformHeight, eDirection transformDirection = eDirection::DOWN, int transformScale = 1)
             : x(transformX)
             , y(transformY)
             , width(transformWidth)
             , height(transformHeight)
             , direction(transformDirection)
+            , scale(transformScale)
     {};
 };
 
