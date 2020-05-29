@@ -15,7 +15,7 @@ public:
         mTextures = {};
     }
 
-    sCar* GetObject() const {
+    GameObject* GetObject() const {
         sCar *car = FactoryMethod();
         if (mTextures.size()) {
             std::srand(std::time(nullptr));

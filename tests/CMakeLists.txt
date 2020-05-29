@@ -10,4 +10,4 @@ endfunction()
 
 init_test(TestStructTransform TestStructTransform.cpp)
 init_test(TestStructCar TestStructCar.cpp)
-init_test(TestManagerClass TestManagerClass.cpp ../src/Classes/Game.cpp)
+init_test(TestManagerClass TestManagerClass.cpp ../src/Classes/Game.cpp ../src/Classes/LoadManager.cpp)
