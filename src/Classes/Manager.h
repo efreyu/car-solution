@@ -13,18 +13,24 @@ protected:
     std::vector<GameObject*> gameObjects;
     std::vector<bool> gameObjectsList;
     std::vector<sTransform> spawnPositions;
-    int carWidth, carHeight, carPadding;
-    float carScale;
+    int mCarWidth, mCarHeight, mCarPadding;
+    float mCarScale;
 
 public:
-
     Manager() {
+        Init(70, 165, 20, 0.5f);
+    }
+
+    Manager(int carWidth, int carHeight, int carPadding, float carScale) {
+        Init(carWidth, carHeight, carPadding, carScale);
+    }
+
+    void Init(int carWidth, int carHeight, int carPadding, float carScale) {
         auto [ width, height, scale ] = Game::GetWindowResolution();
-        //TODO move it to arg
-        carWidth = 70;
-        carHeight = 155;
-        carPadding = 20;
-        carScale = 0.5f * scale;
+        mCarWidth = carWidth;
+        mCarHeight = carHeight;
+        mCarPadding = carPadding;
+        mCarScale = carScale * scale;
         /* top position */
         spawnPositions.emplace_back(sTransform(width / 2 + carPadding, 0, 0, 0, eDirection::DOWN));
         /* bottom position */
@@ -86,6 +92,7 @@ public:
         auto n = std::rand() % 4;
         //
     }
+
 
 };
 

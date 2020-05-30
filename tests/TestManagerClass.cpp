@@ -126,7 +126,7 @@ TEST(TestManagerClass, TestFactoryClass) {
     // Get GameObject class instance
     GameObject *car1 = gasEngineCar->GetObject();
 
-    ASSERT_TRUE(car1->isActive);
+    ASSERT_FALSE(car1->isActive);
     ASSERT_FALSE(car1->isDestroyed);
 
 }

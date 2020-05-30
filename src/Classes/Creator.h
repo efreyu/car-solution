@@ -21,9 +21,6 @@ public:
             std::srand(std::time(nullptr));
             auto n = std::rand() % mTextures.size(); //in the range 0 to vector length
             car->LoadTexture(mTextures[n]);
-            //todo set random position
-            //todo after all set active
-            car->isActive = true;
         }
         return car;
     };
