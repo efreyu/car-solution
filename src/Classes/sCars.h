@@ -17,7 +17,7 @@ public:
         transform = sTransform;
     };
 
-    void Update() {
+    void Update() override {
         switch (transform.direction) {
             case eDirection::UP:
                 transform.y -= GetSpeed();

@@ -70,15 +70,15 @@ public:
         SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, 255);
     }
 
-    static std::pair<int, int> GetWindowResolution() {
+    static std::tuple<int, int, float> GetWindowResolution() {
         int w, h;
         SDL_GetRendererOutputSize(mRenderer, &w, &h);
         if (SDL_GetRendererOutputSize(mRenderer, &w, &h) == 0) {
             //Client window is high dpi device
-            return std::make_pair(w, h);
+            return std::make_tuple(w, h, std::abs(w / mWidth));
         } else {
             //Unable to get the actual area size in pixels, so the resolution is 1:1
-            return std::make_pair(mWidth, mHeight);
+            return std::make_tuple(mWidth, mHeight, 1);
         }
     }
 

@@ -18,12 +18,8 @@ public:
         SDL_DestroyTexture(texture);
     }
 
-    void LoadTexture(std::string path) {
+    void LoadTexture(const std::string& path) {
         texture = LoadManager::LoadTexture((const char*)path.c_str());
-    }
-
-    void Init() {
-        //TODO call this when GO was spawned
     }
 
     void UpdateObject() {

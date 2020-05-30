@@ -42,13 +42,13 @@ public:
         auto n = std::rand() % carTypes.size();
         auto *car = carTypes[n]->GetObject();
         //Manipulation on car
-        auto resolution = Game::GetWindowResolution();
+        auto [ width, height, scale ] = Game::GetWindowResolution();
         //TODO It is only for testing =)
-        car->transform.x = resolution.first / 2;
+        car->transform.x = width / 2;
         car->transform.y = 0;
         car->transform.width = 70;
         car->transform.height = 165;
-        car->transform.scale = 0.5f;
+        car->transform.scale = 0.5f * scale;
         car->transform.direction = eDirection::DOWN;
         car->Refill(200);
         car->SetSpeed(3);

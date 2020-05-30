@@ -2,7 +2,6 @@
 #include <gtest/gtest.h>
 #include "../src/Classes/Game.h"
 #include "../src/Classes/Manager.h"
-#include "../src/Classes/GameObject.h"
 
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
@@ -123,7 +122,8 @@ TEST(TestManagerClass, TestFactoryClass) {
     hybridCar->SetTextures(TestCarExample::hybridCarTextures);
     EXPECT_EQ(hybridCar->getCountRegisteredTextures(),
               TestCarExample::hybridCarTextures.size());
-    
+
+    // Get GameObject class instance
     GameObject *car1 = gasEngineCar->GetObject();
 
     ASSERT_TRUE(car1->isActive);
