@@ -9,6 +9,8 @@ public:
     sTransform transform;
     SDL_Texture *texture{};
     SDL_Rect srcRect{}, destRect{};
+    SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
+    double spriteAngle = 0.0;
     bool isActive;
     bool isDestroyed;
 
@@ -29,8 +31,8 @@ public:
 
     virtual void Update() {}
 
-    void Draw() {
-        LoadManager::Draw(texture, srcRect, destRect);
+    void Draw() const {
+        LoadManager::DrawFlip(texture, srcRect, destRect, spriteAngle, spriteFlip);
     }
 
 private:
@@ -43,6 +45,21 @@ private:
         destRect.h = transform.height * transform.scale;
         destRect.x = transform.x;
         destRect.y = transform.y;
+        //flip sprite
+        switch (transform.direction) {
+            case eDirection::UP:
+                spriteFlip = SDL_FLIP_VERTICAL;
+                break;
+            case eDirection::RIGHT:
+                spriteAngle = -90.0;
+                break;
+            case eDirection::LEFT:
+                spriteAngle = 90.0;
+                break;
+            default:
+                spriteFlip = SDL_FLIP_NONE;
+                spriteAngle = 0.0;
+        }
     }
 };
 

@@ -13,3 +13,8 @@ SDL_Texture *LoadManager::LoadTexture(const char *fileName) {
 void LoadManager::Draw(SDL_Texture *tex, SDL_Rect src, SDL_Rect dest) {
     SDL_RenderCopy(Game::mRenderer, tex, &src, &dest);
 }
+
+void LoadManager::DrawFlip(SDL_Texture * tex, SDL_Rect src, SDL_Rect dest, double angle, SDL_RendererFlip flip)
+{
+    SDL_RenderCopyEx(Game::mRenderer, tex, &src, &dest, angle, nullptr, flip);
+}

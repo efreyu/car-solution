@@ -72,7 +72,6 @@ public:
 
     static std::tuple<int, int, float> GetWindowResolution() {
         int w, h;
-        SDL_GetRendererOutputSize(mRenderer, &w, &h);
         if (SDL_GetRendererOutputSize(mRenderer, &w, &h) == 0) {
             //Client window is high dpi device
             return std::make_tuple(w, h, std::abs(w / mWidth));

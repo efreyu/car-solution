@@ -53,12 +53,24 @@ void Game::Init(const char *title, int xPosition, int yPosition, int width, int 
 }
 
 void Game::RegisterObjects() {
+    manager = new Manager;
     manager->RegisterCarType<GasEngineCreator>((std::vector<std::string>){
             "resources/sprites/Gas/grey.png",
             "resources/sprites/Gas/red.png",
             "resources/sprites/Gas/white.png"
     });
-    manager->SpawnCar();
+    manager->RegisterCarType<ElectroCarCreator>((std::vector<std::string>){
+            "resources/sprites/Electro/black.png",
+            "resources/sprites/Electro/blue.png",
+            "resources/sprites/Electro/red.png",
+            "resources/sprites/Electro/yellow.png"
+    });
+    manager->RegisterCarType<HybridCarCreator>((std::vector<std::string>){
+            "resources/sprites/Hybrid/black.png",
+            "resources/sprites/Hybrid/grey.png",
+            "resources/sprites/Hybrid/white.png"
+    });
+    manager->SpawnCar(4);
 }
 
 void Game::HandleEvents() {

@@ -80,10 +80,7 @@ public:
 
 struct sHybridCar : virtual public sGasEngine, virtual public sElectroCar {
 public:
-    sHybridCar() {
-        sGasEngine();
-        sElectroCar();
-    }
+    sHybridCar() : sGasEngine(), sElectroCar() {};
 
     void Refill(int count) override {
         /* When we pass an odd number we always lose 1, due to int type casting.

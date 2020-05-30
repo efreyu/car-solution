@@ -56,8 +56,8 @@ namespace TestCarExample {
 
     std::vector<std::string> hybridCarTextures = {
             "resources/sprites/Hybrid/black.png",
-            "resources/sprites/Hybrid/gray.png",
-            "resources/sprites/Hybrid/while.png"
+            "resources/sprites/Hybrid/grey.png",
+            "resources/sprites/Hybrid/white.png"
     };
 
     class TestGameClass : public Game {

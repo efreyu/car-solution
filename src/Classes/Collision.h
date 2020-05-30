@@ -9,11 +9,11 @@ public:
      * Axis-aligned bounding boxes (AABB) are the quickest algorithm
      * to determine whether the two game entities are overlapping or not.
      */
-    static bool AABB(const sTransform &transformA, const sTransform &transformB) {
-        return transformA.x + transformA.width >= transformB.x &&
-               transformB.x + transformB.width >= transformA.x &&
-               transformA.y + transformA.height >= transformB.y &&
-               transformB.y + transformB.height >= transformA.y;
+    static bool AABB(const sTransform &transformA, const sTransform &transformB, int padding = 0) {
+        return transformA.x + transformA.width + padding >= transformB.x &&
+               transformB.x + transformB.width + padding >= transformA.x &&
+               transformA.y + transformA.height + padding >= transformB.y &&
+               transformB.y + transformB.height + padding >= transformA.y;
     }
 };
 
