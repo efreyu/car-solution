@@ -75,8 +75,8 @@ TEST(TestGameClass, TestGameClassInit) {
     auto game = new TestCarExample::TestGameClass();
     ASSERT_FALSE(game->isRunning());
     game->SetupWindowResolution(100, 150);
-    auto resolution = game->GetWindowResolution();
-    ASSERT_TRUE(resolution.first == 100 && resolution.second == 150);
+    auto [ width, height, scale ] = TestCarExample::TestGameClass::GetWindowResolution();
+    ASSERT_TRUE(width == 100 && height == 150);
 }
 
 TEST(TestManagerClass, TestAddCarType) {

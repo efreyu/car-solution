@@ -11,8 +11,29 @@ class Manager {
 protected:
     std::vector<Creator*> carTypes;
     std::vector<GameObject*> gameObjects;
+    std::vector<bool> gameObjectsList;
+    std::vector<sTransform> spawnPositions;
+    int carWidth, carHeight, carPadding;
+    float carScale;
 
 public:
+
+    Manager() {
+        auto [ width, height, scale ] = Game::GetWindowResolution();
+        //TODO move it to arg
+        carWidth = 70;
+        carHeight = 155;
+        carPadding = 20;
+        carScale = 0.5f * scale;
+        /* top position */
+        spawnPositions.emplace_back(sTransform(width / 2 + carPadding, 0, 0, 0, eDirection::DOWN));
+        /* bottom position */
+        spawnPositions.emplace_back(sTransform(width / 2 - carPadding, height, 0, 0, eDirection::UP));
+        /* left position */
+        spawnPositions.emplace_back(sTransform(0, height / 2 + carPadding, 0, 0, eDirection::RIGHT));
+        /* right position */
+        spawnPositions.emplace_back(sTransform(width, height / 2 - carPadding, 0, 0, eDirection::LEFT));
+    }
 
     void Update() {
         for (auto& gameObject : gameObjects) {
@@ -58,6 +79,12 @@ public:
 
     void SpawnCar(int n) {
         for (int i = 0; i < n; i++) SpawnCar();
+    }
+
+    void GetRandomPosition() {
+        std::srand(std::time(nullptr));
+        auto n = std::rand() % 4;
+        //
     }
 
 };
