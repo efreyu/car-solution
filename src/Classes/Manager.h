@@ -7,6 +7,7 @@
 #include "GameObject.h"
 #include "Creator.h"
 #include "Collision.h"
+#include "Random.h"
 
 class Manager {
 protected:
@@ -68,8 +69,7 @@ public:
     void SpawnCar() {
         if (!carTypes.size()) return;
 
-        std::srand(std::time(nullptr));
-        auto n = std::rand() % carTypes.size();
+        auto n = Random::GenerateBetween(0, carTypes.size() - 1);
         auto *car = carTypes[n]->GetObject();
         //Manipulation on car
         car->transform.width = mCarWidth;
@@ -118,44 +118,9 @@ private:
                         gameObjectsList[i] = true;
                         gameObjects[i]->transform.x = s.x;
                         gameObjects[i]->transform.y = s.y;
-                        std::cout << s.x << s.y << std::endl;
                         gameObjects[i]->transform.direction = s.direction;
                         gameObjects[i]->isActive = true;
                         isSpawned = true;
-                    }
-                }
-            }
-        }
-    }
-
-    void QueueSpawnUpdate2() {
-        //всё хуйня, переделываем
-        for (int i = 0; i < gameObjectsList.size(); i++) {
-            if (gameObjectsList[i]) continue;
-            for (int l = 0; l < gameObjectsList.size(); l++) {
-                if (!gameObjectsList[l] && mCntSpawned == 0) {
-                    auto s = spawnPositions.front();
-                    mCntSpawned++;
-                    gameObjectsList[i] = true;
-                    gameObjects[i]->transform.x = s.x;
-                    gameObjects[i]->transform.y = s.y;
-                    gameObjects[i]->transform.direction = s.direction;
-                    gameObjects[i]->isActive = true;
-                } else {
-                    //тут нужна функция чтобы перебирать точку и список
-                    bool isSpawned = false;
-                    for (auto s : spawnPositions) {
-                        if (isSpawned) continue;
-                        std::cout << !Collision::AABB(s, gameObjects[l]->transform) << std::endl;
-                        if(!Collision::AABB(s, gameObjects[l]->transform)) {
-                            isSpawned = true;
-                            mCntSpawned++;
-                            gameObjectsList[i] = true;
-                            gameObjects[i]->transform.x = s.x;
-                            gameObjects[i]->transform.y = s.y;
-                            gameObjects[i]->transform.direction = s.direction;
-                            gameObjects[i]->isActive = true;
-                        }
                     }
                 }
             }
