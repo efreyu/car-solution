@@ -70,7 +70,7 @@ void Game::RegisterObjects() {
             "resources/sprites/Hybrid/grey.png",
             "resources/sprites/Hybrid/white.png"
     });
-    manager->SpawnCar(4);
+    manager->SpawnCar(8);
 }
 
 void Game::HandleEvents() {

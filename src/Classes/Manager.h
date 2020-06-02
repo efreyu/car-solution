@@ -20,7 +20,7 @@ protected:
 
 public:
     Manager() {
-        Init(70, 165, 5, 0.5f);
+        Init(165, 165, 50, 0.5f);
     }
 
     Manager(int carWidth, int carHeight, int carPadding, float carScale) {
