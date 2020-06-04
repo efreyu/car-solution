@@ -6,17 +6,33 @@
 
 class GameObject {
 public:
+    int gameObjectId;
     sTransform transform;
     SDL_Texture *texture{};
     SDL_Rect srcRect{}, destRect{};
     SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
     bool isActive;
     bool isDestroyed;
+    int windowWidth, windowHeight;
 
-    GameObject() : isActive(false), isDestroyed(false) {};
+    GameObject() : isActive(false), isDestroyed(false) {
+        auto [ width, height, scale ] = Game::GetWindowResolution();
+        windowWidth = width;
+        windowHeight = height;
+    };
 
     ~GameObject() {
         SDL_DestroyTexture(texture);
+    }
+
+    bool operator==(const GameObject& gameObject) const
+    {
+        return gameObjectId == gameObject.gameObjectId;
+    }
+
+    bool operator!=(const GameObject& gameObject) const
+    {
+        return gameObjectId != gameObject.gameObjectId;
     }
 
     void LoadTexture(const std::string& path) {
@@ -24,9 +40,17 @@ public:
     }
 
     void UpdateObject() {
+        if (transform.x < 0 - transform.height || transform.x > windowWidth + transform.width ||
+        transform.y < 0 - transform.height || transform.y > windowHeight + transform.height) {
+            isActive = false;
+            isDestroyed = true;
+        }
         Update();
         UpdateTransform();
     }
+
+    virtual sTransform GetNextPosition() {}
+    virtual sTransform GetRightPosition() {}
 
     virtual void Update() {}
 

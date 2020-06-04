@@ -18,21 +18,50 @@ public:
     };
 
     void Update() override {
-        switch (transform.direction) {
+        transform = GetNextPosition();
+        FuelBurn();
+    }
+
+    sTransform GetNextPosition() override {
+        sTransform nextTransform = transform;
+        switch (nextTransform.direction) {
             case eDirection::UP:
-                transform.y -= GetSpeed();
+                nextTransform.y -= GetSpeed();
                 break;
             case eDirection::RIGHT:
-                transform.x += GetSpeed();
+                nextTransform.x += GetSpeed();
                 break;
             case eDirection::DOWN:
-                transform.y += GetSpeed();
+                nextTransform.y += GetSpeed();
                 break;
             case eDirection::LEFT:
-                transform.x -= GetSpeed();
+                nextTransform.x -= GetSpeed();
                 break;
         }
-        FuelBurn();
+        return nextTransform;
+    }
+
+    sTransform GetRightPosition() override {
+        sTransform tempTransform = transform;
+        switch (tempTransform.direction) {
+            case eDirection::DOWN:
+                tempTransform.x -= tempTransform.width;
+                tempTransform.y += tempTransform.height;
+                break;
+            case UP:
+                tempTransform.x += tempTransform.width;
+                tempTransform.y -= tempTransform.height;
+                break;
+            case RIGHT:
+                tempTransform.y -= tempTransform.width;
+                tempTransform.x += tempTransform.height;
+                break;
+            case LEFT:
+                tempTransform.y += tempTransform.width;
+                tempTransform.x -= tempTransform.height;
+                break;
+        }
+        return tempTransform;
     }
 
     int GetSpeed() { return GetFuel() > 0 ? speed : minSpeed; };

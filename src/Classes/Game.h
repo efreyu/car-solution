@@ -54,6 +54,7 @@ public:
         SDL_SetWindowSize(mWindow, width, height);
         mWidth = width;
         mHeight = height;
+        RegisterObjects(); //Reinit all objects after resizing the canvas
     }
 
     void HandleEvents();

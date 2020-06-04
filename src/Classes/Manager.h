@@ -3,24 +3,26 @@
 
 #include <vector>
 #include <string>
+#include <map>
 #include "sCars.h"
 #include "GameObject.h"
 #include "Creator.h"
 #include "Collision.h"
 #include "Random.h"
 
+
+
 class Manager {
 protected:
     std::vector<Creator*> carTypes;
     std::vector<GameObject*> gameObjects;
-    std::vector<bool> gameObjectsList;
     std::vector<sTransform> spawnPositions;
     int mCarWidth, mCarHeight, mCarPadding, mCntSpawned;
     float mCarScale;
 
 public:
     Manager() {
-        Init(165, 165, 50, 0.5f);
+        Init(70, 165, 15, 0.5f);
     }
 
     Manager(int carWidth, int carHeight, int carPadding, float carScale) {
@@ -34,20 +36,23 @@ public:
         mCarPadding = carPadding;
         mCarScale = carScale * scale;
         mCntSpawned = 0;
+
         /* top position */
-        spawnPositions.emplace_back(sTransform(width / 2 - mCarPadding - mCarWidth, 0, mCarWidth, mCarHeight, eDirection::DOWN));
+        spawnPositions.emplace_back(sTransform(width / 2 + mCarPadding - mCarWidth, -mCarHeight, mCarWidth, mCarHeight, eDirection::DOWN, mCarScale));
         /* bottom position */
-        spawnPositions.emplace_back(sTransform(width / 2 + mCarPadding + mCarWidth, height, mCarWidth, mCarHeight, eDirection::UP));
+        spawnPositions.emplace_back(sTransform(width / 2 - mCarPadding + mCarWidth, height + carHeight, mCarWidth, mCarHeight, eDirection::UP, mCarScale));
         /* left position */
-        spawnPositions.emplace_back(sTransform(0, height / 2 + mCarPadding + mCarWidth, mCarWidth, mCarHeight, eDirection::RIGHT));
+        spawnPositions.emplace_back(sTransform(-mCarWidth, height / 2 - mCarPadding + mCarWidth, mCarWidth, mCarHeight, eDirection::RIGHT, mCarScale, 90.0));
         /* right position */
-        spawnPositions.emplace_back(sTransform(width, height / 2 - mCarPadding - mCarWidth, mCarWidth, mCarHeight, eDirection::LEFT));
+        spawnPositions.emplace_back(sTransform(width+mCarWidth, height / 2 + mCarPadding - mCarWidth, mCarWidth, mCarHeight, eDirection::LEFT, mCarScale, 90.0));
     }
 
     void Update() {
         QueueSpawnUpdate();
         for (auto& gameObject : gameObjects) {
-            if (gameObject->isActive) gameObject->UpdateObject();
+            if (gameObject->isActive && !HasCollision(*gameObject)) {
+                gameObject->UpdateObject();
+            }
         }
     }
 
@@ -77,54 +82,61 @@ public:
         car->transform.scale = mCarScale;
         car->Refill(200);
         car->SetSpeed(3);
+        car->gameObjectId = gameObjects.size();
         //Store in manager array
         gameObjects.emplace_back(car);
-        gameObjectsList.emplace_back(false);
     }
 
     void SpawnCar(int n) {
         for (int i = 0; i < n; i++) SpawnCar();
     }
 
-    /*
-     * TODO
-     *  1. метод для подсчета рандомной позиции для спавна
-     *  2. метод проверки передвижения на карте
-     */
 private:
     void QueueSpawnUpdate() {
-        for (int i = 0; i < gameObjectsList.size(); i++) {
-            if(gameObjectsList[i]) continue;
+        // random spawn, only for fun =)
+        if (Random::GenerateBetween(0,25) != 0) return;
+
+        bool isSpawned = false;
+        for (auto item : gameObjects) {
+            if (item->isActive || isSpawned) continue;
             else if (mCntSpawned == 0) {
                 //spawn first car
                 auto s = spawnPositions.front();
                 mCntSpawned++;
-                gameObjectsList[i] = true;
-                gameObjects[i]->transform.x = s.x;
-                gameObjects[i]->transform.y = s.y;
-                gameObjects[i]->transform.direction = s.direction;
-                gameObjects[i]->isActive = true;
+                item->transform.x = s.x;
+                item->transform.y = s.y;
+                item->transform.direction = s.direction;
+                item->isActive = true;
             } else {
-                bool isSpawned = false;
+//                bool isSpawned = false;
                 for (auto s : spawnPositions) {
                     bool isEmpty = true;
-                    for (int l = 0; l < gameObjectsList.size(); l++) {
-                        if(!gameObjectsList[i] && Collision::AABB(s, gameObjects[l]->transform, mCarPadding)) {
+                    for (auto const &l : gameObjects) {
+                        if(l->isActive && Collision::AABB(s, l->transform)) {
                             isEmpty = false;
                         }
                     }
                     if (isEmpty && !isSpawned) {
                         mCntSpawned++;
-                        gameObjectsList[i] = true;
-                        gameObjects[i]->transform.x = s.x;
-                        gameObjects[i]->transform.y = s.y;
-                        gameObjects[i]->transform.direction = s.direction;
-                        gameObjects[i]->isActive = true;
+                        item->transform.x = s.x;
+                        item->transform.y = s.y;
+                        item->transform.direction = s.direction;
+                        item->isActive = true;
                         isSpawned = true;
                     }
                 }
             }
         }
+    }
+
+    bool HasCollision(GameObject &gameObject) {
+        for (auto const &a : gameObjects) {
+            if (a->isActive && a->operator!=(gameObject) && (Collision::AABB(gameObject.GetNextPosition(), a->transform) ||
+                Collision::AABB(gameObject.GetRightPosition(), a->transform))) {
+                return true;
+            }
+        }
+        return false;
     }
 
 };
