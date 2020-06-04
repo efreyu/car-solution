@@ -9,7 +9,7 @@ function(INIT_TEST ARG_TARGET)
 endfunction()
 
 init_test(TestStructTransform TestStructTransform.cpp)
-init_test(TestStructCar TestStructCar.cpp)
+init_test(TestStructCar TestStructCar.cpp ../src/Classes/Game.cpp ../src/Classes/LoadManager.cpp)
 init_test(TestManagerClass TestManagerClass.cpp ../src/Classes/Game.cpp ../src/Classes/LoadManager.cpp)
 init_test(TestGameObjectClass TestGameObjectClass.cpp ../src/Classes/Game.cpp ../src/Classes/LoadManager.cpp)
 init_test(TestRandomClass TestRandomClass.cpp)

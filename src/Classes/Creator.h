@@ -30,16 +30,6 @@ public:
         mTextures = textures;
     }
 
-    void SetTransform() {
-        //todo set random position
-    }
-
-    sTransform GetRandomPosition() {
-        std::srand(std::time(nullptr));
-        sTransform *transform;
-        //TODO
-    }
-
 };
 
 class GasEngineCreator : public Creator {

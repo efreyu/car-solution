@@ -19,8 +19,8 @@ public:
             , y(transformY)
             , width(transformWidth)
             , height(transformHeight)
-            , direction(transformDirection)
             , scale(transformScale)
+            , direction(transformDirection)
             , angle(transformAngle)
     {};
 };

@@ -12,8 +12,8 @@ private:
 public:
 
     sCar() { speed = minSpeed; };
-    sCar(int speed, sTransform sTransform) {
-        speed = speed;
+    sCar(int iSpeed, sTransform sTransform) {
+        speed = iSpeed;
         transform = sTransform;
     };
 
@@ -53,12 +53,12 @@ public:
                 tempTransform.y -= tempTransform.height;
                 break;
             case RIGHT:
-                tempTransform.y -= tempTransform.width;
-                tempTransform.x += tempTransform.height;
+                tempTransform.y -= tempTransform.height;
+                tempTransform.x += tempTransform.width;
                 break;
             case LEFT:
-                tempTransform.y += tempTransform.width;
-                tempTransform.x -= tempTransform.height;
+                tempTransform.y += tempTransform.height;
+                tempTransform.x -= tempTransform.width;
                 break;
         }
         return tempTransform;
