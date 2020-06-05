@@ -1,5 +1,5 @@
 
-# Test task ![Linux build](https://github.com/efreyu/test-task/workflows/Linux%20build/badge.svg?branch=master) 
+# Test task ![Linux build](https://github.com/efreyu/test-task/workflows/Linux%20build/badge.svg?branch=master) ![Webassembly build](https://github.com/efreyu/test-task/workflows/Webassembly%20build/badge.svg?branch=master) 
 
 #### В самом начале вам необходимо развернуть проект
 ```bash
