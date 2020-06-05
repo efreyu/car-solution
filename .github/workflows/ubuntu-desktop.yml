@@ -7,12 +7,14 @@ on:
       - '*.md'
       - '.gitignore'
       - 'docker/**'
+      - 'webassembly.yml'
   pull_request:
     paths-ignore:
       - 'docs/**'
       - '*.md'
       - '.gitignore'
       - 'docker/**'
+      - 'webassembly.yml'
 
 jobs:
 
@@ -38,17 +40,10 @@ jobs:
           sudo apt-get update -y
           sudo apt-get dist-upgrade -y
           sudo apt-get install -y --fix-missing \
-          git zip cron curl wget python libxml2-dev build-essential libssl-dev software-properties-common \
+          git zip cron curl wget python llvm libxml2-dev build-essential libssl-dev software-properties-common \
           checkinstall libx11-dev libxext-dev zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev libxml2-dev \
           libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libsdl2-2.0-0 libsdl2-dev libsdl2-image-dev \
-          libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev libsdl2-gfx-dev && \
-          sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y && \
-          sudo apt-get update && \
-          sudo apt-get install gcc-8 g++-8 -y && \
-          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 60 && \
-          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 60 && \
-          sudo update-alternatives --config gcc && \
-          sudo add-apt-repository --remove ppa:ubuntu-toolchain-r/test -y
+          libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev libsdl2-gfx-dev
 
       - name: Clone. 🛎️
         uses: actions/checkout@v1

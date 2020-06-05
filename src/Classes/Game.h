@@ -2,6 +2,7 @@
 #define CAR_EXAMPLE_GAME_H
 
 #include <iostream>
+#include <tuple>
 #include <SDL2/SDL.h>
 #if defined(__APPLE__)
 #include <SDL2_image/SDL_image.h>
