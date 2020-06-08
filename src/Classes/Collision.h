@@ -3,6 +3,7 @@
 
 #include "sTransform.h"
 #include <cmath>
+#include <vector>
 
 namespace Collisions {
     struct Point {
@@ -34,6 +35,17 @@ public:
          * is used to check the intersection of the planes
          */
         return HasVortexIntersection(GetRect(transformA), GetRect(transformB));
+    }
+
+    static int MinObjectDistances(std::vector<GameObject> const &transformArray, sTransform const &transform) {
+
+        return 0;
+    }
+
+    static float SquareDistance(sTransform const &transformA, sTransform const &transformB) {
+        auto objA = GetCenter(transformA);
+        auto objB = GetCenter(transformB);
+        return std::abs(objA.x - objB.x) + std::abs(objA.y - objB.y);
     }
 
 protected:

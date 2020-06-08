@@ -17,6 +17,7 @@ protected:
     std::vector<Creator*> carTypes;
     std::vector<GameObject*> gameObjects;
     std::vector<sTransform> spawnPositions;
+    sTransform *crossroads;
     int mCarWidth, mCarHeight, mCarPadding;
     float mCarScale;
     int mCntSpawned, mCntRegistered;
@@ -45,13 +46,15 @@ public:
         spawnPositions.emplace_back(sTransform(0 - mCarWidth, height / 2  + mCarWidth * mCarScale, mCarWidth, mCarHeight, eDirection::RIGHT, mCarScale, 90.0));
         /* right position */
         spawnPositions.emplace_back(sTransform(width+mCarWidth, height / 2 - mCarWidth * mCarScale, mCarWidth, mCarHeight, eDirection::LEFT, mCarScale, 90.0));
+
+        crossroads = new sTransform(width / 2 - mCarWidth * mCarScale / 2 * 3, height / 2  - mCarWidth * mCarScale / 2 * 3, mCarHeight * mCarScale * 2, mCarHeight * mCarScale * 2);
     }
 
     void Update() {
         ReinitObjects();
         QueueSpawnUpdate();
         for (auto& gameObject : gameObjects) {
-            if (gameObject->isActive && !HasCollision(*gameObject)) {
+            if (gameObject->isActive && !HasCollision(*gameObject) && CanPassCrossroads(*gameObject)) {
                 gameObject->UpdateObject();
             }
         }
@@ -151,6 +154,36 @@ private:
         }
         return false;
     }
+
+    bool CanPassCrossroads(GameObject &gameObject) {
+        if (!Collision::AABB(gameObject.GetNextPosition(), *crossroads))
+            return true;
+
+        //3. Пропускаем того кто справа
+        //4. Пропусаем того кто имееет x < 0
+        std::vector<GameObject> objects = {};
+        for(auto &a : gameObjects) {
+            if (a->isActive && Collision::AABB(a->GetNextPosition(), *crossroads)) {
+                auto obj = new GameObject();
+                obj->gameObjectId = a->gameObjectId;
+                obj->transform = sTransform(
+                        a->transform.x, a->transform.y,
+                        a->transform.width * a->transform.scale,
+                        a->transform.height * a->transform.scale);
+
+                objects.emplace_back(*obj);
+            }
+        }
+        //1. Пропускаем если машина одна
+        if (objects.size() == 1 && gameObject.operator==(objects[0])) return true;
+        //2. Пропускаем того кто ближе к центру (машина проезжает)
+//        if (objects.size() == 4) {
+//
+//        }
+        std::cout << objects.size() << std::endl;
+        return false;
+    }
+
 
 };
 
