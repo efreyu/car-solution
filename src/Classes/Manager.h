@@ -90,7 +90,7 @@ public:
         car->transform.width = mCarWidth;
         car->transform.height = mCarHeight;
         car->transform.scale = mCarScale;
-        car->Refill(200);
+        car->Refill(Random::GenerateBetween(200, 300));
         car->SetSpeed(3 * std::get<2>(Game::GetWindowResolution()));
         car->SetMinSpeed(1 * std::get<2>(Game::GetWindowResolution()));
         car->gameObjectId = mCntRegistered++;
