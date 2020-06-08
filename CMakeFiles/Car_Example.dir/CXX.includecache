@@ -9,7 +9,11 @@
 /home/runner/work/test-task/test-task/src/Classes/Collision.h
 sTransform.h
 /home/runner/work/test-task/test-task/src/Classes/sTransform.h
+GameObject.h
+/home/runner/work/test-task/test-task/src/Classes/GameObject.h
 cmath
+-
+vector
 -
 
 /home/runner/work/test-task/test-task/src/Classes/Creator.h
