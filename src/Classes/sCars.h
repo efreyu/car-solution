@@ -16,6 +16,7 @@ public:
         speed = iSpeed;
         transform = sTransform;
     };
+    ~sCar() {}
 
     void Update() override {
         transform = GetNextPosition();
@@ -41,32 +42,10 @@ public:
         return nextTransform;
     }
 
-    sTransform GetRightPosition() override {
-        sTransform tempTransform = transform;
-        switch (tempTransform.direction) {
-            case eDirection::DOWN:
-                tempTransform.x -= tempTransform.width;
-                tempTransform.y += tempTransform.height;
-                break;
-            case UP:
-                tempTransform.x += tempTransform.width;
-                tempTransform.y -= tempTransform.height;
-                break;
-            case RIGHT:
-                tempTransform.y -= tempTransform.height;
-                tempTransform.x += tempTransform.width;
-                break;
-            case LEFT:
-                tempTransform.y += tempTransform.height;
-                tempTransform.x -= tempTransform.width;
-                break;
-        }
-        return tempTransform;
-    }
-
     int GetSpeed() { return GetFuel() > 0 ? speed : minSpeed; };
 
     void SetSpeed(int i) { speed = i; };
+    void SetMinSpeed(int i) { minSpeed = i; };
 
     virtual void FuelBurn() = 0;
 

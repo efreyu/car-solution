@@ -80,7 +80,7 @@ general_help() {
             pc "none" "для остановки одного контейнера\n"
         ;;
         --own|-o|own|o)
-            pc "green" "$0 --own container-name cmd"
+            pc "green" "$0 --own <container-name> <cmd> "
             pc "none" "выполнить произвольную команду в контейнере\n"
         ;;
         --remove|remove)
@@ -135,7 +135,8 @@ case "$1" in
         eval ${DOCKERCORE} system prune -a
         ;;
     --test|-t)
-        eval ${DOCKERCMD} exec php-cli php vendor/bin/phpunit
+        pc "yellow" "Nothing caused.\n"
+#        eval ${DOCKERCMD} exec ubuntu bash make_test
         ;;
     --help|-h)
         general_help $2 $3

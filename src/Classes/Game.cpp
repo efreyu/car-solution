@@ -7,6 +7,7 @@ auto manager = new Manager;
 /*
  * Define static
  */
+bool Game::mIsEmscripten = false;
 SDL_Renderer* Game::mRenderer = nullptr;
 int Game::mWidth = 0;
 int Game::mHeight = 0;

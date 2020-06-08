@@ -24,7 +24,7 @@ const bool debugMode = false;
 
 class Game {
 protected:
-    bool mIsEmscripten;
+    static bool mIsEmscripten;
     bool mIsRunning = false;
     SDL_Window *mWindow;
     static int mWidth, mHeight;
@@ -74,7 +74,7 @@ public:
 
     static std::tuple<int, int, float> GetWindowResolution() {
         int w, h;
-        if (SDL_GetRendererOutputSize(mRenderer, &w, &h) == 0) {
+        if (!mIsEmscripten && SDL_GetRendererOutputSize(mRenderer, &w, &h) == 0) {
             //Client window is high dpi device
             return std::make_tuple(w, h, std::abs(w / mWidth));
         } else {
@@ -84,7 +84,7 @@ public:
     }
 
     bool isRunning() { return mIsRunning; }
-    constexpr bool isEmscripten() { return mIsEmscripten; }
+    static bool isEmscripten() { return mIsEmscripten; }
     constexpr bool isDebug() { return mIsDebug; }
 };
 

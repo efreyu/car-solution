@@ -17,37 +17,38 @@ protected:
     std::vector<Creator*> carTypes;
     std::vector<GameObject*> gameObjects;
     std::vector<sTransform> spawnPositions;
-    int mCarWidth, mCarHeight, mCarPadding, mCntSpawned;
+    int mCarWidth, mCarHeight, mCarPadding;
     float mCarScale;
+    int mCntSpawned, mCntRegistered;
 
 public:
     Manager() {
-        Init(70, 165, 15, 0.5f);
+        Init(70, 165, 0.5f);
     }
 
-    Manager(int carWidth, int carHeight, int carPadding, float carScale) {
-        Init(carWidth, carHeight, carPadding, carScale);
+    Manager(int carWidth, int carHeight, float carScale) {
+        Init(carWidth, carHeight, carScale);
     }
 
-    void Init(int carWidth, int carHeight, int carPadding, float carScale) {
+    void Init(int carWidth, int carHeight, float carScale) {
         auto [ width, height, scale ] = Game::GetWindowResolution();
         mCarWidth = carWidth;
         mCarHeight = carHeight;
-        mCarPadding = carPadding;
         mCarScale = carScale * scale;
-        mCntSpawned = 0;
+        mCntSpawned = mCntRegistered = 0;
 
         /* top position */
-        spawnPositions.emplace_back(sTransform(width / 2 + mCarPadding - mCarWidth, -mCarHeight, mCarWidth, mCarHeight, eDirection::DOWN, mCarScale));
+        spawnPositions.emplace_back(sTransform(width / 2 - mCarWidth * mCarScale, -mCarHeight, mCarWidth, mCarHeight, eDirection::DOWN, mCarScale));
         /* bottom position */
-        spawnPositions.emplace_back(sTransform(width / 2 - mCarPadding + mCarWidth, height + carHeight, mCarWidth, mCarHeight, eDirection::UP, mCarScale));
+        spawnPositions.emplace_back(sTransform(width / 2  + mCarWidth * mCarScale, height + mCarHeight, mCarWidth, mCarHeight, eDirection::UP, mCarScale));
         /* left position */
-        spawnPositions.emplace_back(sTransform(-mCarWidth, height / 2 - mCarPadding + mCarWidth, mCarWidth, mCarHeight, eDirection::RIGHT, mCarScale, 90.0));
+        spawnPositions.emplace_back(sTransform(0 - mCarWidth, height / 2  + mCarWidth * mCarScale, mCarWidth, mCarHeight, eDirection::RIGHT, mCarScale, 90.0));
         /* right position */
-        spawnPositions.emplace_back(sTransform(width+mCarWidth, height / 2 + mCarPadding - mCarWidth, mCarWidth, mCarHeight, eDirection::LEFT, mCarScale, 90.0));
+        spawnPositions.emplace_back(sTransform(width+mCarWidth, height / 2 - mCarWidth * mCarScale, mCarWidth, mCarHeight, eDirection::LEFT, mCarScale, 90.0));
     }
 
     void Update() {
+        ReinitObjects();
         QueueSpawnUpdate();
         for (auto& gameObject : gameObjects) {
             if (gameObject->isActive && !HasCollision(*gameObject)) {
@@ -81,8 +82,9 @@ public:
         car->transform.height = mCarHeight;
         car->transform.scale = mCarScale;
         car->Refill(200);
-        car->SetSpeed(3);
-        car->gameObjectId = gameObjects.size();
+        car->SetSpeed(3 * std::get<2>(Game::GetWindowResolution()));
+        car->SetMinSpeed(1 * std::get<2>(Game::GetWindowResolution()));
+        car->gameObjectId = mCntRegistered++;
         //Store in manager array
         gameObjects.emplace_back(car);
     }
@@ -94,7 +96,7 @@ public:
 private:
     void QueueSpawnUpdate() {
         // random spawn, only for fun =)
-        if (Random::GenerateBetween(0,25) != 0) return;
+        if (Random::GenerateBetween(0,15) != 0) return;
 
         bool isSpawned = false;
         for (auto item : gameObjects) {
@@ -109,7 +111,8 @@ private:
                 item->isActive = true;
             } else {
 //                bool isSpawned = false;
-                for (auto s : spawnPositions) {
+                for (int i = 0; i < 4; i++) {
+                    auto s = Random::GetRandomVector<sTransform>(spawnPositions);
                     bool isEmpty = true;
                     for (auto const &l : gameObjects) {
                         if(l->isActive && Collision::AABB(s, l->transform)) {
@@ -129,10 +132,20 @@ private:
         }
     }
 
+    void ReinitObjects() {
+        if (gameObjects.size() < 20) {
+            SpawnCar(5);
+        }
+        for (int i = 0; i < gameObjects.size(); i++) {
+            if (gameObjects[i]->isDestroyed) {
+                gameObjects.erase(gameObjects.begin() + i, gameObjects.begin() + i + 1);
+            }
+        }
+    }
+
     bool HasCollision(GameObject &gameObject) {
         for (auto const &a : gameObjects) {
-            if (a->isActive && a->operator!=(gameObject) && (Collision::AABB(gameObject.GetNextPosition(), a->transform) ||
-                Collision::AABB(gameObject.GetRightPosition(), a->transform))) {
+            if (a->isActive && a->operator!=(gameObject) && Collision::AABB(gameObject.GetNextPosition(), a->transform)) {
                 return true;
             }
         }

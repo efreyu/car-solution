@@ -40,17 +40,17 @@ public:
     }
 
     void UpdateObject() {
-        if (transform.x < 0 - transform.height || transform.x > windowWidth + transform.width ||
-        transform.y < 0 - transform.height || transform.y > windowHeight + transform.height) {
+        if (transform.x > 0 - transform.height * 2 && transform.x < windowWidth + transform.height * 2 &&
+        transform.y > 0 - transform.height * 2 && transform.y < windowHeight + transform.height * 2) {
+            Update();
+            UpdateTransform();
+        } else {
             isActive = false;
             isDestroyed = true;
         }
-        Update();
-        UpdateTransform();
     }
 
-    virtual sTransform GetNextPosition() {}
-    virtual sTransform GetRightPosition() {}
+    virtual sTransform GetNextPosition() { return *new sTransform(); };
 
     virtual void Update() {}
 

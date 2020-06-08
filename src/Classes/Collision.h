@@ -88,18 +88,6 @@ protected:
         return rect;
     }
 
-//    static bool HasCollision(const Rect &rectA, const Rect &rectB) {
-//        for (auto &a : rectA.point) {
-//            for (auto &b : rectB.point) {
-//                if (b.x >= a.x && b.x <= rectA.center.x &&
-//                    b.y >= a.y && b.y <= rectA.center.y) {
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
-
     static bool HasVortexIntersection(const Rect &a, const Rect &b)
     {
         for(int rect_i = 0; rect_i < 2; ++rect_i)
