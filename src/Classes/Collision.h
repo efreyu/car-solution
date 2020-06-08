@@ -2,6 +2,7 @@
 #define CAR_EXAMPLE_COLLISION_H
 
 #include "sTransform.h"
+#include "GameObject.h"
 #include <cmath>
 #include <vector>
 
