@@ -71,7 +71,7 @@ void Game::RegisterObjects() {
             "resources/sprites/Hybrid/grey.png",
             "resources/sprites/Hybrid/white.png"
     });
-    manager->SpawnCar(45);
+    manager->SpawnCar(15);
 }
 
 void Game::HandleEvents() {

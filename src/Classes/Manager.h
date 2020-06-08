@@ -21,6 +21,7 @@ protected:
     int mCarWidth, mCarHeight, mCarPadding;
     float mCarScale;
     int mCntSpawned, mCntRegistered;
+    eDirection directions[4];
 
 public:
     Manager() {
@@ -48,6 +49,11 @@ public:
         spawnPositions.emplace_back(sTransform(width+mCarWidth, height / 2 - mCarWidth * mCarScale, mCarWidth, mCarHeight, eDirection::LEFT, mCarScale, 90.0));
 
         crossroads = new sTransform(width / 2 - mCarWidth * mCarScale / 2 * 3, height / 2  - mCarWidth * mCarScale / 2 * 3, mCarHeight * mCarScale * 2, mCarHeight * mCarScale * 2);
+
+        directions[eDirection::DOWN] = eDirection::RIGHT;
+        directions[eDirection::RIGHT] = eDirection::UP;
+        directions[eDirection::UP] = eDirection::LEFT;
+        directions[eDirection::LEFT] = eDirection::DOWN;
     }
 
     void Update() {
@@ -136,7 +142,7 @@ private:
     }
 
     void ReinitObjects() {
-        if (gameObjects.size() < 20) {
+        if (gameObjects.size() < 5) {
             SpawnCar(5);
         }
         for (int i = 0; i < gameObjects.size(); i++) {
@@ -156,31 +162,53 @@ private:
     }
 
     bool CanPassCrossroads(GameObject &gameObject) {
-        if (!Collision::AABB(gameObject.GetNextPosition(), *crossroads))
+        //1. Пропускаем машину имеющую флаг, либо если нет пересечения с перекрестком
+        if (gameObject.isRides || !Collision::AABB(gameObject.GetNextPosition(), *crossroads))
             return true;
 
-        //3. Пропускаем того кто справа
-        //4. Пропусаем того кто имееет x < 0
-        std::vector<GameObject> objects = {};
-        for(auto &a : gameObjects) {
-            if (a->isActive && Collision::AABB(a->GetNextPosition(), *crossroads)) {
-                auto obj = new GameObject();
-                obj->gameObjectId = a->gameObjectId;
-                obj->transform = sTransform(
-                        a->transform.x, a->transform.y,
-                        a->transform.width * a->transform.scale,
-                        a->transform.height * a->transform.scale);
-
-                objects.emplace_back(*obj);
+        std::vector<int> objects;
+        for(int i = 0; i < gameObjects.size(); i++) {
+            if (gameObjects[i]->isActive && Collision::AABB(gameObjects[i]->GetNextPosition(), *crossroads)) {
+                if (gameObjects[i]->isRides) return false;
+                objects.emplace_back(i);
             }
         }
-        //1. Пропускаем если машина одна
-        if (objects.size() == 1 && gameObject.operator==(objects[0])) return true;
-        //2. Пропускаем того кто ближе к центру (машина проезжает)
-//        if (objects.size() == 4) {
-//
-//        }
+
+        //2. Пропускаем если машина одна (нет помех)
+        if (objects.size() == 1 && gameObjects[objects[0]]->operator==(gameObject)) {
+            gameObject.isRides = true;
+            return true;
+        }
+
+        //3. Пропускаем того кто справа
+        if (objects.size() < 4) {
+            for (auto &i : objects) {
+                if (!HasRightInterference(objects, gameObjects[i]->transform.direction)) {
+                    gameObjects[i]->isRides = true;
+                    return false;
+                }
+            }
+        }
+        //4. Пропусаем того кто имееет x < 0
+        if (objects.size() == 4) {
+            for (auto &i : objects) {
+                if (gameObjects[i]->transform.direction == eDirection::DOWN) {
+                    gameObjects[i]->isRides = true;
+                    return false;
+                }
+            }
+        }
+
         std::cout << objects.size() << std::endl;
+        return false;
+    }
+
+    bool HasRightInterference(const std::vector<int> &array, eDirection dir) {
+        for (auto &a : array) {
+            if (gameObjects[a]->transform.direction == directions[dir]) {
+                return true;
+            }
+        }
         return false;
     }
 

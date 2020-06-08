@@ -19,9 +19,12 @@ using Rect = std::vector<Point>;
 
 class Collision {
 public:
-    /*
+    /**
      * Axis-aligned bounding boxes (AABB) are the quickest algorithm
      * to determine whether the two game entities are overlapping or not.
+     * @param transformA
+     * @param transformB
+     * @return
      */
     static bool AABB(const sTransform &transformA, const sTransform &transformB) {
         if ((transformA.angle == 0.0 || (int)std::abs(transformA.angle) % 180 == 0) &&
@@ -38,29 +41,69 @@ public:
         return HasVortexIntersection(GetRect(transformA), GetRect(transformB));
     }
 
-    static int MinObjectDistances(std::vector<GameObject> const &transformArray, sTransform const &transform) {
-
-        return 0;
+    /**
+     * Функция для нахождения объекта с наименьим расстоянием до центра перекрестка. Не используется.
+     * @param transformArray
+     * @param transform
+     * @return
+     */
+    static int MinObjectDistance(std::vector<GameObject> const &transformArray, sTransform const &transform) {
+        int closestObject = 0;
+        for (int i = 1; i < transformArray.size(); ++i) {
+            if (SquareDistance(transformArray[closestObject].transform, transform)
+                > SquareDistance(transformArray[i].transform, transform)) {
+                closestObject = i;
+            }
+        }
+        return transformArray[closestObject].gameObjectId;
     }
 
+    /**
+     * Функция для получения расстояния между двумя объектами. Не используется.
+     * @param transformA
+     * @param transformB
+     * @return Дистанция между двумя центрами прямоугольников
+     */
     static float SquareDistance(sTransform const &transformA, sTransform const &transformB) {
-        auto objA = GetCenter(transformA);
-        auto objB = GetCenter(transformB);
-        return std::abs(objA.x - objB.x) + std::abs(objA.y - objB.y);
+        return PointDistance(GetCenter(transformA), GetCenter(transformB));
+    }
+
+    /**
+     * Функция для получения расстояния между двумя точками
+     * @param pointA
+     * @param pointB
+     * @return Дистанция между двумя точками
+     */
+    static float PointDistance(Point const &pointA, Point const &pointB) {
+        return (float)sqrt(pow(pointB.x - pointA.x, 2) + pow(pointB.y - pointA.y, 2) * 1.0);
     }
 
 protected:
 
+    /**
+     * @param angle
+     * @return
+     */
     static float Theta(const double &angle) {
         return (float)(angle / 180 * M_PI);
     }
 
+    /**
+     * Функция для получения точки центра прямоугольника
+     * @param transform
+     * @return
+     */
     static Point GetCenter(const sTransform &transform) {
         return Point(transform.x + (transform.width * transform.scale / 2),
                 transform.y + (transform.height * transform.scale / 2)
                 );
     }
 
+    /**
+     * Функция для получения вершин прямоугольника с учетом угла поворота
+     * @param transform
+     * @return
+     */
     static Rect GetRect(const sTransform &transform) {
         Rect rect{};
         // 1. default coordinates when the angle of the rectangle is zero or the remainder of dividing the angle by 180 is 0
@@ -101,6 +144,12 @@ protected:
         return rect;
     }
 
+    /**
+     * Функция подсчета пересечения вершин двух прямоугольников, с учетом угла поворота
+     * @param a
+     * @param b
+     * @return
+     */
     static bool HasVortexIntersection(const Rect &a, const Rect &b)
     {
         for(int rect_i = 0; rect_i < 2; ++rect_i)

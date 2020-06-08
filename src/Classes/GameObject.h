@@ -11,15 +11,25 @@ public:
     SDL_Texture *texture{};
     SDL_Rect srcRect{}, destRect{};
     SDL_RendererFlip spriteFlip = SDL_FLIP_NONE;
-    bool isActive;
-    bool isDestroyed;
+    bool isActive, isDestroyed, isRides;
     int windowWidth, windowHeight;
 
-    GameObject() : isActive(false), isDestroyed(false) {
+    GameObject() {
+        Init();
+    };
+
+    GameObject(int id, sTransform transformPos) : gameObjectId(id), transform(transformPos) {
+        Init();
+    }
+
+    void Init() {
+        isActive = false;
+        isDestroyed = false;
+        isRides = false;
         auto [ width, height, scale ] = Game::GetWindowResolution();
         windowWidth = width;
         windowHeight = height;
-    };
+    }
 
     ~GameObject() {
         SDL_DestroyTexture(texture);
