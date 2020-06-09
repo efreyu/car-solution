@@ -2,8 +2,11 @@
 
 #include "Game.h"
 #include "Manager.h"
+#include "MapManager.h"
+#include <vector>
 
 auto manager = new Manager;
+auto mapManager = new MapManager;
 /*
  * Define static
  */
@@ -71,7 +74,13 @@ void Game::RegisterObjects() {
             "resources/sprites/Hybrid/grey.png",
             "resources/sprites/Hybrid/white.png"
     });
-    manager->SpawnCar(15);
+    manager->SpawnCar(10);
+
+    //fill the ground texture
+    mapManager = new MapManager;
+    mapManager->InitGroundTexture("resources/sprites/road/road_ground.png", 256, 256);
+    mapManager->InitRoadTexture("resources/sprites/road/road_line.png", 256, 256);
+    mapManager->InitCrossroadTexture("resources/sprites/road/road_cross.png", 256, 256);
 }
 
 void Game::HandleEvents() {
@@ -87,11 +96,13 @@ void Game::HandleEvents() {
 }
 
 void Game::Update() {
+    mapManager->Update();
     manager->Update();
 }
 
 void Game::Render() {
     SDL_RenderClear(mRenderer);
+    mapManager->Draw();
     manager->Draw();
     SDL_RenderPresent(mRenderer);
 }
