@@ -7,6 +7,7 @@
 
 auto manager = new Manager;
 auto mapManager = new MapManager;
+bool buttonPressed = false;
 /*
  * Define static
  */
@@ -78,7 +79,6 @@ void Game::RegisterObjects() {
 
     //fill the ground texture
     mapManager = new MapManager;
-    mapManager->InitGroundTexture("resources/sprites/road/road_ground.png", 256, 256);
     mapManager->InitRoadTexture("resources/sprites/road/road_line.png", 256, 256);
     mapManager->InitCrossroadTexture("resources/sprites/road/road_cross.png", 256, 256);
 }
@@ -89,7 +89,15 @@ void Game::HandleEvents() {
         case SDL_QUIT:
             mIsRunning = false;
             break;
-
+        case SDL_MOUSEBUTTONDOWN:
+            if (!buttonPressed) buttonPressed = true;
+            break;
+        case SDL_MOUSEBUTTONUP:
+            if (buttonPressed) {
+                manager->SpawnCar(5);
+                buttonPressed = !buttonPressed;
+            }
+            break;
         default:
             break;
     }

@@ -38,7 +38,7 @@ int main()
     emscripten_set_main_loop(wasm_game_loop, 0, 1);
 #else
     game_loop();
-#endif //EMSCRIPTEN_IS_USED
+#endif //__EMSCRIPTEN__
 
     return 0;
 }

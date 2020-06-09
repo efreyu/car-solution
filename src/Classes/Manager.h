@@ -122,7 +122,6 @@ private:
                 item->transform.direction = s.direction;
                 item->isActive = true;
             } else {
-//                bool isSpawned = false;
                 for (int i = 0; i < 4; i++) {
                     auto s = Random::GetRandomVector<sTransform>(spawnPositions);
                     bool isEmpty = true;
@@ -201,7 +200,6 @@ private:
             }
         }
 
-        std::cout << objects.size() << std::endl;
         return false;
     }
 
