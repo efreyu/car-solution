@@ -39,16 +39,19 @@ public:
         mCarScale = carScale * scale;
         mCntSpawned = mCntRegistered = 0;
 
-        /* top position */
-        spawnPositions.emplace_back(sTransform(width / 2 - mCarWidth * mCarScale, -mCarHeight, mCarWidth, mCarHeight, eDirection::DOWN, mCarScale));
-        /* bottom position */
-        spawnPositions.emplace_back(sTransform(width / 2  + mCarWidth * mCarScale, height + mCarHeight, mCarWidth, mCarHeight, eDirection::UP, mCarScale));
-        /* left position */
-        spawnPositions.emplace_back(sTransform(0 - mCarWidth, height / 2  + mCarWidth * mCarScale, mCarWidth, mCarHeight, eDirection::RIGHT, mCarScale, 90.0));
-        /* right position */
-        spawnPositions.emplace_back(sTransform(width+mCarWidth, height / 2 - mCarWidth * mCarScale, mCarWidth, mCarHeight, eDirection::LEFT, mCarScale, 90.0));
+        int objectWidth = mCarWidth * mCarScale;
+        int objectHeight = mCarHeight * mCarScale;
 
-        crossroads = new sTransform(width / 2 - mCarWidth * mCarScale / 2 * 3, height / 2  - mCarWidth * mCarScale / 2 * 3, mCarHeight * mCarScale * 2, mCarHeight * mCarScale * 2);
+        /* top position */
+        spawnPositions.emplace_back(sTransform(width / 2 - (objectWidth + objectWidth / 2), -mCarHeight, mCarWidth, mCarHeight, eDirection::DOWN, mCarScale));
+        /* bottom position */
+        spawnPositions.emplace_back(sTransform(width / 2  + (objectWidth - objectWidth / 2), height + mCarHeight, mCarWidth, mCarHeight, eDirection::UP, mCarScale));
+        /* left position */
+        spawnPositions.emplace_back(sTransform(0 - mCarWidth, height / 2, mCarWidth, mCarHeight, eDirection::RIGHT, mCarScale, 90.0));
+        /* right position */
+        spawnPositions.emplace_back(sTransform(width + mCarWidth, height / 2 - objectHeight, mCarWidth, mCarHeight, eDirection::LEFT, mCarScale, 90.0));
+
+        crossroads = new sTransform(width / 2 - objectWidth * 2, height / 2  - objectWidth * 2, objectWidth * 4, objectWidth * 4);
 
         directions[eDirection::DOWN] = eDirection::RIGHT;
         directions[eDirection::RIGHT] = eDirection::UP;
@@ -185,7 +188,6 @@ private:
             for (auto &i : objects) {
                 if (!HasRightInterference(objects, gameObjects[i]->transform.direction)) {
                     gameObjects[i]->isRides = true;
-                    return false;
                 }
             }
         }

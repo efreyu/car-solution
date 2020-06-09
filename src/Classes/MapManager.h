@@ -32,8 +32,8 @@ public:
     }
 
     void InitGroundTexture(char const* path, int imgWidth, int imgHeight) {
-        for (int i = 0; i < windowWidth / imgWidth; ++i) {
-            for (int j = 0; j < windowHeight / imgHeight; ++j) {
+        for (int i = 0; i < windowWidth / imgWidth + 1; ++i) {
+            for (int j = 0; j < windowHeight / imgHeight + 1; ++j) {
                 auto *ground = new GameObject();
                 ground->transform.width = imgWidth * windowScale;
                 ground->transform.height = imgHeight * windowScale;
@@ -47,7 +47,7 @@ public:
     }
 
     void InitRoadTexture(char const* path, int imgWidth, int imgHeight) {
-        for (int i = 0; i < windowWidth / imgWidth; ++i) {
+        for (int i = 0; i < windowWidth / imgWidth + 1; ++i) {
             auto *ground = new GameObject();
             ground->transform.width = imgWidth * windowScale;
             ground->transform.height = imgHeight * windowScale;
@@ -57,7 +57,7 @@ public:
 
             groundObjects.emplace_back(ground);
         }
-        for (int i = 0; i < windowHeight / imgHeight; ++i) {
+        for (int i = 0; i < windowHeight / imgHeight + 1; ++i) {
             auto *ground = new GameObject();
             ground->transform.width = imgWidth * windowScale;
             ground->transform.height = imgHeight * windowScale;
