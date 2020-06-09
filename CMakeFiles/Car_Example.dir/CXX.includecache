@@ -29,6 +29,10 @@ Game.h
 /home/runner/work/test-task/test-task/src/Classes/Game.h
 Manager.h
 /home/runner/work/test-task/test-task/src/Classes/Manager.h
+MapManager.h
+/home/runner/work/test-task/test-task/src/Classes/MapManager.h
+vector
+-
 
 /home/runner/work/test-task/test-task/src/Classes/Game.h
 iostream
@@ -77,6 +81,12 @@ Collision.h
 /home/runner/work/test-task/test-task/src/Classes/Collision.h
 Random.h
 /home/runner/work/test-task/test-task/src/Classes/Random.h
+
+/home/runner/work/test-task/test-task/src/Classes/MapManager.h
+vector
+-
+GameObject.h
+/home/runner/work/test-task/test-task/src/Classes/GameObject.h
 
 /home/runner/work/test-task/test-task/src/Classes/Random.h
 random

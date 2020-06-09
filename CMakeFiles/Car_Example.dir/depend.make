@@ -8,6 +8,7 @@ CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o: ../src/Classes/Game.h
 CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o: ../src/Classes/GameObject.h
 CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o: ../src/Classes/LoadManager.h
 CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o: ../src/Classes/Manager.h
+CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o: ../src/Classes/MapManager.h
 CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o: ../src/Classes/Random.h
 CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o: ../src/Classes/sCars.h
 CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o: ../src/Classes/sTransform.h
