@@ -1,14 +1,25 @@
 
-# car solution ![Linux build](https://github.com/efreyu/test-task/workflows/Linux%20build/badge.svg?branch=master) ![Webassembly build](https://github.com/efreyu/test-task/workflows/Webassembly%20build/badge.svg?branch=master) 
+# Car solution ![Linux build](https://github.com/efreyu/car-solution/workflows/Linux%20build/badge.svg?branch=master) ![Webassembly build](https://github.com/efreyu/car-solution/workflows/Webassembly%20build/badge.svg?branch=master) 
+#### Описание:
+##### Простая визуализация пересечения машинами перекрестка. Реализованна с использованием C++ и SDL2, совместимая с WebAssembly. Для тестирования и отладки сборки с emscripten использовалось окружение докера.
+##### По [ссылке](https://efreyu.github.io/car-solution/) доступна версия для запуска прямо в браузере.
 
+#### Управление:
+По клику/тачу по экрану происходит создание 5 новых машин на карте.
+В данном примере нельзя управлять движением транспорта и потоком.
+
+#### Совместимость:
+Сборка тестировалась на `Linux(Arch linux / Ubuntu)` и `macOS Catalina 10.15.4`, а также во всех последних браузерах с вертикальным и горизонтальным разрешением.
+
+#### Установка и запуск:
 #### В самом начале вам необходимо развернуть проект
 ```bash
-git clone git@github.com:efreyu/test-task.git test-task 
-cd test-task
+git clone git@github.com:efreyu/car-solution.git car-solution 
+cd car-solution
 ```
 
 #### Сбора WebAssembly:
-Требуется установить emscripten
+Требуется установить `emscripten`
 ```bash
 mkdir public
 cd public
@@ -17,7 +28,7 @@ make -j$(nproc)
 ```
 
 #### Сборка десктоп версии Linux/MacOS:
-Требуется libsdl2 libsdl2img, для macos все включено в cmake
+Требуется `libsdl2` `libsdl2img`, для macOS все включено в cmake
 ```bash
 mkdir build
 cd build
