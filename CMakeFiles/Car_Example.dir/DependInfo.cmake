@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/runner/work/test-task/test-task/src/Classes/Game.cpp" "/home/runner/work/test-task/test-task/build/CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o"
-  "/home/runner/work/test-task/test-task/src/Classes/LoadManager.cpp" "/home/runner/work/test-task/test-task/build/CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.o"
-  "/home/runner/work/test-task/test-task/src/main.cpp" "/home/runner/work/test-task/test-task/build/CMakeFiles/Car_Example.dir/src/main.cpp.o"
+  "/home/runner/work/car-solution/car-solution/src/Classes/Game.cpp" "/home/runner/work/car-solution/car-solution/build/CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o"
+  "/home/runner/work/car-solution/car-solution/src/Classes/LoadManager.cpp" "/home/runner/work/car-solution/car-solution/build/CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.o"
+  "/home/runner/work/car-solution/car-solution/src/main.cpp" "/home/runner/work/car-solution/car-solution/build/CMakeFiles/Car_Example.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

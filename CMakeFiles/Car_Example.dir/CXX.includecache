@@ -6,35 +6,35 @@
 
 #IncludeRegexTransform: 
 
-/home/runner/work/test-task/test-task/src/Classes/Collision.h
+/home/runner/work/car-solution/car-solution/src/Classes/Collision.h
 sTransform.h
-/home/runner/work/test-task/test-task/src/Classes/sTransform.h
+/home/runner/work/car-solution/car-solution/src/Classes/sTransform.h
 GameObject.h
-/home/runner/work/test-task/test-task/src/Classes/GameObject.h
+/home/runner/work/car-solution/car-solution/src/Classes/GameObject.h
 cmath
 -
 vector
 -
 
-/home/runner/work/test-task/test-task/src/Classes/Creator.h
+/home/runner/work/car-solution/car-solution/src/Classes/Creator.h
 vector
 -
 sTransform.h
-/home/runner/work/test-task/test-task/src/Classes/sTransform.h
+/home/runner/work/car-solution/car-solution/src/Classes/sTransform.h
 Random.h
-/home/runner/work/test-task/test-task/src/Classes/Random.h
+/home/runner/work/car-solution/car-solution/src/Classes/Random.h
 
-/home/runner/work/test-task/test-task/src/Classes/Game.cpp
+/home/runner/work/car-solution/car-solution/src/Classes/Game.cpp
 Game.h
-/home/runner/work/test-task/test-task/src/Classes/Game.h
+/home/runner/work/car-solution/car-solution/src/Classes/Game.h
 Manager.h
-/home/runner/work/test-task/test-task/src/Classes/Manager.h
+/home/runner/work/car-solution/car-solution/src/Classes/Manager.h
 MapManager.h
-/home/runner/work/test-task/test-task/src/Classes/MapManager.h
+/home/runner/work/car-solution/car-solution/src/Classes/MapManager.h
 vector
 -
 
-/home/runner/work/test-task/test-task/src/Classes/Game.h
+/home/runner/work/car-solution/car-solution/src/Classes/Game.h
 iostream
 -
 tuple
@@ -48,23 +48,23 @@ SDL2/SDL_image.h
 emscripten.h
 -
 
-/home/runner/work/test-task/test-task/src/Classes/GameObject.h
+/home/runner/work/car-solution/car-solution/src/Classes/GameObject.h
 sTransform.h
-/home/runner/work/test-task/test-task/src/Classes/sTransform.h
+/home/runner/work/car-solution/car-solution/src/Classes/sTransform.h
 LoadManager.h
-/home/runner/work/test-task/test-task/src/Classes/LoadManager.h
+/home/runner/work/car-solution/car-solution/src/Classes/LoadManager.h
 
-/home/runner/work/test-task/test-task/src/Classes/LoadManager.cpp
+/home/runner/work/car-solution/car-solution/src/Classes/LoadManager.cpp
 LoadManager.h
-/home/runner/work/test-task/test-task/src/Classes/LoadManager.h
+/home/runner/work/car-solution/car-solution/src/Classes/LoadManager.h
 Game.h
-/home/runner/work/test-task/test-task/src/Classes/Game.h
+/home/runner/work/car-solution/car-solution/src/Classes/Game.h
 
-/home/runner/work/test-task/test-task/src/Classes/LoadManager.h
+/home/runner/work/car-solution/car-solution/src/Classes/LoadManager.h
 Game.h
-/home/runner/work/test-task/test-task/src/Classes/Game.h
+/home/runner/work/car-solution/car-solution/src/Classes/Game.h
 
-/home/runner/work/test-task/test-task/src/Classes/Manager.h
+/home/runner/work/car-solution/car-solution/src/Classes/Manager.h
 vector
 -
 string
@@ -72,35 +72,35 @@ string
 map
 -
 sCars.h
-/home/runner/work/test-task/test-task/src/Classes/sCars.h
+/home/runner/work/car-solution/car-solution/src/Classes/sCars.h
 GameObject.h
-/home/runner/work/test-task/test-task/src/Classes/GameObject.h
+/home/runner/work/car-solution/car-solution/src/Classes/GameObject.h
 Creator.h
-/home/runner/work/test-task/test-task/src/Classes/Creator.h
+/home/runner/work/car-solution/car-solution/src/Classes/Creator.h
 Collision.h
-/home/runner/work/test-task/test-task/src/Classes/Collision.h
+/home/runner/work/car-solution/car-solution/src/Classes/Collision.h
 Random.h
-/home/runner/work/test-task/test-task/src/Classes/Random.h
+/home/runner/work/car-solution/car-solution/src/Classes/Random.h
 
-/home/runner/work/test-task/test-task/src/Classes/MapManager.h
+/home/runner/work/car-solution/car-solution/src/Classes/MapManager.h
 vector
 -
 GameObject.h
-/home/runner/work/test-task/test-task/src/Classes/GameObject.h
+/home/runner/work/car-solution/car-solution/src/Classes/GameObject.h
 
-/home/runner/work/test-task/test-task/src/Classes/Random.h
+/home/runner/work/car-solution/car-solution/src/Classes/Random.h
 random
 -
 
-/home/runner/work/test-task/test-task/src/Classes/sCars.h
+/home/runner/work/car-solution/car-solution/src/Classes/sCars.h
 GameObject.h
-/home/runner/work/test-task/test-task/src/Classes/GameObject.h
+/home/runner/work/car-solution/car-solution/src/Classes/GameObject.h
 sTransform.h
-/home/runner/work/test-task/test-task/src/Classes/sTransform.h
+/home/runner/work/car-solution/car-solution/src/Classes/sTransform.h
 
-/home/runner/work/test-task/test-task/src/Classes/sTransform.h
+/home/runner/work/car-solution/car-solution/src/Classes/sTransform.h
 
-/home/runner/work/test-task/test-task/src/main.cpp
+/home/runner/work/car-solution/car-solution/src/main.cpp
 Classes/Game.h
-/home/runner/work/test-task/test-task/src/Classes/Game.h
+/home/runner/work/car-solution/car-solution/src/Classes/Game.h
 

@@ -60,10 +60,10 @@ RM = /opt/cmake/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/runner/work/test-task/test-task
+CMAKE_SOURCE_DIR = /home/runner/work/car-solution/car-solution
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/runner/work/test-task/test-task/build
+CMAKE_BINARY_DIR = /home/runner/work/car-solution/car-solution/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Car_Example.dir/depend.make
@@ -76,42 +76,42 @@ include CMakeFiles/Car_Example.dir/flags.make
 
 CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o: CMakeFiles/Car_Example.dir/flags.make
 CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o: ../src/Classes/Game.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/test-task/test-task/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o"
-	em++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o -c /home/runner/work/test-task/test-task/src/Classes/Game.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/car-solution/car-solution/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o"
+	em++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.o -c /home/runner/work/car-solution/car-solution/src/Classes/Game.cpp
 
 CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.i"
-	em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/test-task/test-task/src/Classes/Game.cpp > CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.i
+	em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/car-solution/car-solution/src/Classes/Game.cpp > CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.i
 
 CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.s"
-	em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/test-task/test-task/src/Classes/Game.cpp -o CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.s
+	em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/car-solution/car-solution/src/Classes/Game.cpp -o CMakeFiles/Car_Example.dir/src/Classes/Game.cpp.s
 
 CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.o: CMakeFiles/Car_Example.dir/flags.make
 CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.o: ../src/Classes/LoadManager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/test-task/test-task/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.o"
-	em++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.o -c /home/runner/work/test-task/test-task/src/Classes/LoadManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/car-solution/car-solution/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.o"
+	em++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.o -c /home/runner/work/car-solution/car-solution/src/Classes/LoadManager.cpp
 
 CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.i"
-	em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/test-task/test-task/src/Classes/LoadManager.cpp > CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.i
+	em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/car-solution/car-solution/src/Classes/LoadManager.cpp > CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.i
 
 CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.s"
-	em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/test-task/test-task/src/Classes/LoadManager.cpp -o CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.s
+	em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/car-solution/car-solution/src/Classes/LoadManager.cpp -o CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.s
 
 CMakeFiles/Car_Example.dir/src/main.cpp.o: CMakeFiles/Car_Example.dir/flags.make
 CMakeFiles/Car_Example.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/test-task/test-task/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Car_Example.dir/src/main.cpp.o"
-	em++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Car_Example.dir/src/main.cpp.o -c /home/runner/work/test-task/test-task/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/runner/work/car-solution/car-solution/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Car_Example.dir/src/main.cpp.o"
+	em++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Car_Example.dir/src/main.cpp.o -c /home/runner/work/car-solution/car-solution/src/main.cpp
 
 CMakeFiles/Car_Example.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Car_Example.dir/src/main.cpp.i"
-	em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/test-task/test-task/src/main.cpp > CMakeFiles/Car_Example.dir/src/main.cpp.i
+	em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/runner/work/car-solution/car-solution/src/main.cpp > CMakeFiles/Car_Example.dir/src/main.cpp.i
 
 CMakeFiles/Car_Example.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Car_Example.dir/src/main.cpp.s"
-	em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/test-task/test-task/src/main.cpp -o CMakeFiles/Car_Example.dir/src/main.cpp.s
+	em++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/runner/work/car-solution/car-solution/src/main.cpp -o CMakeFiles/Car_Example.dir/src/main.cpp.s
 
 # Object files for target Car_Example
 Car_Example_OBJECTS = \
@@ -127,7 +127,7 @@ main.js: CMakeFiles/Car_Example.dir/src/Classes/LoadManager.cpp.o
 main.js: CMakeFiles/Car_Example.dir/src/main.cpp.o
 main.js: CMakeFiles/Car_Example.dir/build.make
 main.js: CMakeFiles/Car_Example.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/runner/work/test-task/test-task/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable main.js"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/runner/work/car-solution/car-solution/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable main.js"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Car_Example.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -140,6 +140,6 @@ CMakeFiles/Car_Example.dir/clean:
 .PHONY : CMakeFiles/Car_Example.dir/clean
 
 CMakeFiles/Car_Example.dir/depend:
-	cd /home/runner/work/test-task/test-task/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/runner/work/test-task/test-task /home/runner/work/test-task/test-task /home/runner/work/test-task/test-task/build /home/runner/work/test-task/test-task/build /home/runner/work/test-task/test-task/build/CMakeFiles/Car_Example.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/runner/work/car-solution/car-solution/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/runner/work/car-solution/car-solution /home/runner/work/car-solution/car-solution /home/runner/work/car-solution/car-solution/build /home/runner/work/car-solution/car-solution/build /home/runner/work/car-solution/car-solution/build/CMakeFiles/Car_Example.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Car_Example.dir/depend
 
